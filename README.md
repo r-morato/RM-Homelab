@@ -3,9 +3,6 @@
 <img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" />
 
 
-
-
-
 ## Overview
 
 This repository documents the components, services, and setup of my personal home lab. Designed for a mix of virtualization, media serving, and home automation, it's a continuously evolving platform for learning and hosting various services. I focused this project on good processing power whilst using low power usage, which is why I decided to go with the hardware below. 
@@ -24,7 +21,7 @@ This repository documents the components, services, and setup of my personal hom
 A detailed breakdown of the hardware and software making up the homelab:
 
 * **Hardware:**
-    * [Rack Build Components](components/hardware/rack_components.md)
+    * [Rack Build Components](rackBuild.md)
     * [ESP32 with eInk Screen (Proxmox Status)](components/hardware/esp32_eink.md)
     * [APC Back-UPS 0.5 KVA 300W](components/hardware/apc_ups.md)
     * [MSI Spatium S270 240GB SSDs](components/hardware/msi_spatium_ssd.md)
