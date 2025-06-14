@@ -6,7 +6,7 @@ A Raspberry Pi 4 serves as the dedicated host for Home Assistant OS, acting as t
 
 ## Specifications
 
-* **Model:** Raspberry Pi 4 (Specific RAM variant not specified, e.g., 4GB or 8GB).
+* **Model:** Raspberry Pi 4 8GB.
 * **Operating System:** Home Assistant OS (bare-metal installation).
 * **Power:** Powered via the 6-Port USB Charger.
 
