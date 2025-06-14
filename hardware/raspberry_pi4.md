@@ -34,4 +34,4 @@ The Home Assistant instance on this Raspberry Pi manages a variety of smart home
 
 ## Mounting
 
-This Raspberry Pi is housed in a custom 3D printed 10-inch rack mount, ensuring a tidy and secure installation within the homelab rack. (Refer to [Raspberry Pi 10-inch Rack Mount](3d_prints/README.md) for details).
+This Raspberry Pi is housed in a custom 3D printed 10-inch rack mount, ensuring a tidy and secure installation within the homelab rack.
