@@ -1,6 +1,7 @@
 # Rack Build Components
 
 This section details the custom-built physical enclosure and mounting solutions that form the backbone of the homelab. I based my design on the GeekPi 8U rack, I initially planned to purchase it however it was not available in my country and I felt like I could do something pretty similar without breaking the bank. 
+
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/c838a7d2-b6ab-43d4-aebb-ba36a7a60ff8" />
 
 
