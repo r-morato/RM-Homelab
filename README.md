@@ -33,7 +33,6 @@ A detailed breakdown of the hardware and software making up the homelab:
     * [ThinkCentre M720q Tiny](hardware/thinkcentre_q720m.md)
     * [Mac Mini (Jump Server)](hardware/mac_mini_jump.md)
     * [QNAP NAS (4TB Mirrored Drives)](hardware/qnap_nas.md)
-    * [6-Port USB Charger](hardware/usb_charger.md)
 
 * **Software & Services:**
     * [Proxmox Virtual Environment](software/proxmox.md)
