@@ -1,6 +1,17 @@
 # Rack Build Components
 
-This section details the custom-built physical enclosure and mounting solutions that form the backbone of the homelab.
+This section details the custom-built physical enclosure and mounting solutions that form the backbone of the homelab. I based my design on the GeekPi 8U rack, I initially planned to purchase it however it was not available in my country and I felt like I could do something pretty similar without breaking the bank. 
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/c838a7d2-b6ab-43d4-aebb-ba36a7a60ff8" />
+
+
+## Initial 3D renders
+<img width="616" alt="image" src="https://github.com/user-attachments/assets/f481e324-415e-4707-a65e-6ea06317e182" />
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/2379e38c-b208-4b4e-971b-3876f66c33f2" />
+
+## Build Progress
+<img width="418" alt="image" src="https://github.com/user-attachments/assets/e6fa72c9-3254-439b-ac3b-530a314c1241" /><img width="426" alt="image" src="https://github.com/user-attachments/assets/5e81913e-e11e-4161-b8c8-94687ab118e5" />
+<img width="466" alt="image" src="https://github.com/user-attachments/assets/f93d114e-7681-438f-84ee-db0ac5e2156b" /><img width="460" alt="image" src="https://github.com/user-attachments/assets/19988fa2-2e88-4998-9a24-4950a8a08b20" />
+<img width="356" alt="image" src="https://github.com/user-attachments/assets/7f82542f-f7e4-44d9-9e92-540f3b61dbbc" /><img width="384" alt="image" src="https://github.com/user-attachments/assets/ae049537-af08-4b88-b6a7-9d310f2d8af9" />
 
 ## Structure & Enclosure
 
@@ -68,3 +79,10 @@ Several components are integrated into the rack using custom 3D printed solution
 * **ThinkCentre M720q/M920q Rack Mount:**
     * **Description:** A specific mount for the ThinkCentre Tiny PC, allowing it to be securely installed in the rack.
     * **Link:** [Thingiverse.com Link](https://www.thingiverse.com/thing:6859441)
+* **Custom plate for eInk screen:**
+    * **Made this one by measuring the screen and printing a mount that fitted it perfectly
+
+
+
+
+
