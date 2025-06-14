@@ -72,9 +72,8 @@ Here are the primary services running, categorized by their function:
 ## Diagrams
 
 Visual representations of the homelab's structure and connectivity:
-* [Network Diagram](diagrams/network_diagram.drawio)
-* [Rack Elevation](diagrams/rack_elevation.drawio)
-* [Logical Flow Diagram](diagrams/logical_flow.drawio)
+* [Network Diagram](diagrams/network_diagram)
+* Rack Diagram
 
 ## Customizations & 3D Prints
 
