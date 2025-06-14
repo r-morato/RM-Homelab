@@ -58,11 +58,11 @@ graph TD
         MacMini -- "Web Access" --> HomeAssistant[Home Assistant];
         HomeAssistant -- "Control" --> ZigbeeDongle;
         HomeAssistant -- "Control" --> HiveHub;
-        HomeAssistant -- "Control" --> Ecovacs[Ecovacs (Integration)];
-        HomeAssistant -- "Control" --> Ring[Ring (Integration)];
-        HomeAssistant -- "Control" --> OctopusEnergy[Octopus Energy (Integration)];
-        HomeAssistant -- "Control" --> LGWebOS[LG webOS TV (Integration)];
-        HomeAssistant -- "Control" --> Tuya[Tuya (Integration)];
+        HomeAssistant -- "Control" --> Ecovacs[Ecovacs Integration];
+        HomeAssistant -- "Control" --> Ring[Ring Integration];
+        HomeAssistant -- "Control" --> OctopusEnergy[Octopus Energy Integration];
+        HomeAssistant -- "Control" --> LGWebOS[LG webOS TV Integration];
+        HomeAssistant -- "Control" --> Tuya[Tuya Integration];
         Plex -- "Read Media" --> QNAP;
         QBittorrent -- "Write Media" --> QNAP;
         ThinkCentre -- "Run VMs/LXCs" --> Pihole;
