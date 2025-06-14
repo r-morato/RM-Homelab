@@ -1,6 +1,7 @@
 # RM-Homelab
 
-<img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" />
+<img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" />![Uploading image.png…]()
+
 
 
 ## Overview
