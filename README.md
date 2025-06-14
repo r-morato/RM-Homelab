@@ -21,7 +21,7 @@ This repository documents the components, services, and setup of my personal hom
 A detailed breakdown of the hardware and software making up the homelab:
 
 * **Hardware:**
-    * [Rack Build Components](rackBuild.md)
+    * [Rack Build Components](RackBuild.md)
     * [ESP32 with eInk Screen (Proxmox Status)](components/hardware/esp32_eink.md)
     * [APC Back-UPS 0.5 KVA 300W](components/hardware/apc_ups.md)
     * [MSI Spatium S270 240GB SSDs](components/hardware/msi_spatium_ssd.md)
