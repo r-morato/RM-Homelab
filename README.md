@@ -1,10 +1,10 @@
 # RM-Homelab
 
-![Homelab Rack](media/images/tempImagePQJTqr.jpg)
+![image](https://github.com/user-attachments/assets/d14330ff-a8f8-408a-9ad8-298f03cefd5b)
 
 ## Overview
 
-This repository documents the components, services, and setup of my personal home lab. Designed for a mix of virtualization, media serving, and home automation, it's a continuously evolving platform for learning and hosting various services.
+This repository documents the components, services, and setup of my personal home lab. Designed for a mix of virtualization, media serving, and home automation, it's a continuously evolving platform for learning and hosting various services. I focused this project on good processing power whilst using low power usage, which is why I decided to go with the hardware below. 
 
 ## Key Features
 
