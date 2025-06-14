@@ -5,8 +5,7 @@ This section details the custom-built physical enclosure and mounting solutions 
 
 
 ## Initial 3D renders
-<img width="616" alt="image" src="https://github.com/user-attachments/assets/f481e324-415e-4707-a65e-6ea06317e182" />
-<img width="550" alt="image" src="https://github.com/user-attachments/assets/2379e38c-b208-4b4e-971b-3876f66c33f2" />
+<img width="616" alt="image" src="https://github.com/user-attachments/assets/f481e324-415e-4707-a65e-6ea06317e182" /><img width="550" alt="image" src="https://github.com/user-attachments/assets/2379e38c-b208-4b4e-971b-3876f66c33f2" />
 
 ## Build Progress
 <img width="418" alt="image" src="https://github.com/user-attachments/assets/e6fa72c9-3254-439b-ac3b-530a314c1241" /><img width="426" alt="image" src="https://github.com/user-attachments/assets/5e81913e-e11e-4161-b8c8-94687ab118e5" />
