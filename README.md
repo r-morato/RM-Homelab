@@ -72,26 +72,14 @@ Here are the primary services running, categorized by their function:
 ## Diagrams
 
 Visual representations of the homelab's structure and connectivity:
-* [Network Diagram](diagrams/network_diagram)
-* Rack Diagram
+* [Network Diagram](diagrams/network-diagram)
+* [Rack Diagram](diagrams/rack-diagram)
 
 ## Customizations & 3D Prints
 
 Details on custom solutions and 3D printed components used in the build:
 * [Custom 3D Prints](3d_prints/README.md)
 
-## Automation
-
-Scripts and configurations for automating various aspects of the homelab:
-* [Ansible Playbooks](automation/ansible/)
-* [Utility Scripts](automation/scripts/)
-* [Home Assistant Automations](automation/home_assistant_automations/)
-
-## Issues & Lessons Learned
-
-Documentation of common challenges encountered and their resolutions:
-* [Common Issues](issues/common_issues.md)
-* [Troubleshooting Guides](issues/troubleshooting_guides.md)
 
 ## Future Plans
 
