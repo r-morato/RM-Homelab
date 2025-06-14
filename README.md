@@ -24,7 +24,6 @@ A detailed breakdown of the hardware and software making up the homelab:
     * [Rack Build Components](RackBuild.md)
     * [ESP32 with eInk Screen (Proxmox Status)](https://github.com/r-morato/ESP32-Proxmox-Monitor)
     * [APC Back-UPS 0.5 KVA 300W](hardware/apc_ups.md)
-    * [MSI Spatium S270 240GB SSDs](hardware/msi_spatium_ssd.md)
     * [Oimaster HE-2006 4-Slot SATA Rack](hardware/oimaster_he2006.md)
     * [PCIe 1x Express to 4-Port SATA Card](hardware/pcie_sata_card.md)
     * [Raspberry Pi 4 (Home Assistant)](hardware/raspberry_pi4.md)
