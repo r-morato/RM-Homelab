@@ -1,4 +1,4 @@
-# My Ultimate Home Lab
+# RM-Homelab
 
 ![Homelab Rack](media/images/tempImagePQJTqr.jpg)
 
