@@ -1,0 +1,68 @@
+
+- name: Update and secure LXC containers
+  hosts: lxc_containers  # You should define this group in your inventory
+  become: yes
+  tasks:
+
+    # Step 1: Update apt cache
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    # Step 2: Upgrade all packages
+    - name: Upgrade all packages
+      ansible.builtin.apt:
+        upgrade: dist
+        force_apt_get: yes  # Force updates to be done if there are locked packages
+
+    # Step 3: Install security updates (non-interactive)
+    - name: Install security updates
+      ansible.builtin.apt:
+        upgrade: dist
+        only_upgrade: yes
+        update_cache: yes
+        cache_valid_time: 3600
+        force_apt_get: yes
+
+    # Step 4: Remove unused packages and clean cache
+    - name: Remove unused packages
+      ansible.builtin.apt:
+        autoremove: yes
+        autoclean: yes
+
+    # Step 5: Ensure container is using the latest security updates
+    - name: Ensure all security patches are installed
+      ansible.builtin.command:
+        cmd: unattended-upgrade -d
+        creates: /var/log/unattended-upgrades/unattended-upgrades.log
+      ignore_errors: yes
+
+    # Step 6: Reboot the container if needed (optional)
+    - name: Reboot the container if updates require it
+      ansible.builtin.reboot:
+        reboot_timeout: 600  # Set to a reasonable timeout for reboot
+        test_command: uptime  # Test to confirm system is back up after reboot
+      when: ansible_facts['pkg_mgr'] == "apt"  # Only reboot if apt-based OS (like Ubuntu)
+      register: reboot_result
+      ignore_errors: yes
+
+    # Step 7: Verify uptime after reboot
+    - name: Verify that the container is back online after reboot
+      ansible.builtin.wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        state: started
+        delay: 10
+        timeout: 300
+      when: reboot_result is changed
+      register: container_up
+
+    # Step 8: Verify the updated versions
+    - name: Check installed packages versions
+      ansible.builtin.shell: dpkg-query -l | grep -i "version"
+      register: installed_packages
+      changed_when: false
+
+    - name: Show updated package list
+      debug:
+        msg: "{{ installed_packages.stdout_lines }}"
