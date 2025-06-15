@@ -1,0 +1,39 @@
+---
+- name: Deploy a Docker service
+  hosts: docker_hosts # Define this group in your inventory for hosts running Docker
+  become: yes
+  vars:
+    container_name: "my_new_container"
+    docker_image: "ubuntu:latest"
+    container_state: "started" # or "absent", "stopped", "restarted"
+    container_ports: [] # Example: ["80:8080", "443:8443"] (HostPort:ContainerPort)
+    container_volumes: [] # Example: ["/path/on/host:/path/in/container"]
+    container_env: {} # Example: { "TZ": "Europe/London", "PUID": "1000" }
+    restart_policy: "unless-stopped" # Example: "always", "on-failure", "no"
+    networks: [] # Example: ["mynetwork"]
+
+  tasks:
+    - name: Ensure Docker is installed
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: Ensure Docker service is running
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create or update Docker container '{{ container_name }}'
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ docker_image }}"
+        state: "{{ container_state }}"
+        ports: "{{ container_ports }}"
+        volumes: "{{ container_volumes }}"
+        env: "{{ container_env }}"
+        restart_policy: "{{ restart_policy }}"
+        networks: "{{ networks }}"
+        pull: yes # Always pull latest image
