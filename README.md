@@ -24,7 +24,7 @@ This repository documents the components, services, and setup of my personal hom
 A detailed breakdown of the hardware and software making up the homelab:
 
 * **Hardware:**
-    * [Rack Build Components](RackBuild.md)
+    * [Rack Build Components](rack-build.md)
     * [ESP32 with eInk Screen (Proxmox Status)](https://github.com/r-morato/ESP32-Proxmox-Monitor)
     * [APC Back-UPS 0.5 KVA 300W](hardware/apc_ups.md)
     * [Oimaster HE-2006 4-Slot SATA Rack](hardware/oimaster_he2006.md)
