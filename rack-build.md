@@ -36,21 +36,21 @@ Everything is based on a modular aluminum profile system, with side panels and i
 
 ### Structural Frame
 
-- **Extruded Aluminum Profiles (20x20mm)**
-  [ebay](https://www.ebay.co.uk/itm/305826763149?var=604998211152)
-  The core of the frame — lightweight, strong, and modular.
+- **Extruded Aluminum Profiles (20x20mm)**  
+  [ebay](https://www.ebay.co.uk/itm/305826763149?var=604998211152)  
+  The core of the frame — lightweight, strong, and modular.  
   
-- **Corner Connectors**
+- **Corner Connectors**  
   [Amazon UK Link](https://www.amazon.co.uk/dp/B0CPL6DDYH?ref=ppx_yo2ov_dt_b_fed_asin_title)  
-  For rigid 90° joints between profiles.
+  For rigid 90° joints between profiles.  
 
-- **M5 T-Slot Bolts & Nuts**
+- **M5 T-Slot Bolts & Nuts**  
   [Amazon UK Link](https://www.amazon.co.uk/dp/B0CDBY3PHR?ref=ppx_yo2ov_dt_b_fed_asin_title)  
-  Used throughout for adjustable, tool-free component mounting.
+  Used throughout for adjustable, tool-free component mounting.  
 
 ### Panels & Seals
 
-- **Acrylic Side Panels (Clear, Custom Cut)**
+- **Acrylic Side Panels (Clear, Custom Cut)**  
   [plasticsheets.com](https://www.plasticsheets.com/clear-acrylic-sheet-cut-to-size/)  
   Keeps the rack enclosed but visible for aesthetics and protection.
 
