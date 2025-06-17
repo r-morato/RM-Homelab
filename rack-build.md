@@ -37,35 +37,41 @@ Everything is based on a modular aluminum profile system, with side panels and i
 ### Structural Frame
 
 - **Extruded Aluminum Profiles (20x20mm)**  
+  The core of the frame — lightweight, strong, and modular. 
   [ebay](https://www.ebay.co.uk/itm/305826763149?var=604998211152)  
-  The core of the frame — lightweight, strong, and modular.  
+ 
   
 - **Corner Connectors**  
-  [Amazon UK Link](https://www.amazon.co.uk/dp/B0CPL6DDYH?ref=ppx_yo2ov_dt_b_fed_asin_title)  
   For rigid 90° joints between profiles.  
+  [Amazon UK Link](https://www.amazon.co.uk/dp/B0CPL6DDYH?ref=ppx_yo2ov_dt_b_fed_asin_title)  
+  
 
 - **M5 T-Slot Bolts & Nuts**  
-  [Amazon UK Link](https://www.amazon.co.uk/dp/B0CDBY3PHR?ref=ppx_yo2ov_dt_b_fed_asin_title)  
   Used throughout for adjustable, tool-free component mounting.  
+  [Amazon UK Link](https://www.amazon.co.uk/dp/B0CDBY3PHR?ref=ppx_yo2ov_dt_b_fed_asin_title)  
+
 
 ### Panels & Seals
 
-- **Acrylic Side Panels (Clear, Custom Cut)**  
+- **Acrylic Side Panels (Clear, Custom Cut)**
+  Keeps the rack enclosed but visible for aesthetics and protection.  
   [plasticsheets.com](https://www.plasticsheets.com/clear-acrylic-sheet-cut-to-size/)  
-  Keeps the rack enclosed but visible for aesthetics and protection.
+
 
 - **Flat Seal Panel Holders**
+  Slotted into aluminum rails to hold acrylic securely and help reduce dust ingress.  
   [AliExpress](https://www.aliexpress.com/item/1005003222704634.html?spm=a2g0o.order_list.order_list_main.25.270b1802RzCqnd)
-  Slotted into aluminum rails to hold acrylic securely and help reduce dust ingress.
+
 
 ### Mobility & Handling
 
 - **Top-Mounted Aluminum Handles**
+  Makes it easy to move the rack when needed.  
   [AliExpress](https://www.aliexpress.com/item/1005006105161997.html?spm=a2g0o.order_list.order_list_main.15.270b1802RzCqnd)
-  Makes it easy to move the rack when needed.
+
 
 - **1” Low-Profile Caster Wheels**
-  For smooth repositioning on floors — no heavy lifting required.
+  For smooth repositioning on floors — no heavy lifting required.  
   [AliExpress](https://www.aliexpress.com/item/1005007219086138.html?spm=a2g0o.order_list.order_list_main.5.270b1802RzCqnd)  
 ---
 
@@ -74,12 +80,13 @@ Everything is based on a modular aluminum profile system, with side panels and i
 While it's a 10-inch rack footprint, many mounts are custom-made or adapted to fit non-standard devices.
 
 - **10” Rack Ears**
+  Standard rack brackets used in combination with custom prints. They required to be perforated to properly fit into the aluminium profiles.
   [Amazon UK Link](https://www.amazon.co.uk/dp/B00LFSC3K6?ref=ppx_yo2ov_dt_b_fed_asin_title)  
-  Standard rack brackets used in combination with custom prints.
+
 
 - **Perforated Aluminum Sheets**
-  [ebay](https://www.ebay.co.uk/itm/305840202662?var=605028245526)
   3mm thick, 10mm holes. Used to create shelves, blanks, or airflow panels.
+  [ebay](https://www.ebay.co.uk/itm/305840202662?var=605028245526)
 
 ---
 
@@ -88,33 +95,33 @@ While it's a 10-inch rack footprint, many mounts are custom-made or adapted to f
 Internal power is handled by compact 10” PDUs designed for SOHO setups.
 
 - **4-Way 10” Horizontal PDU (UK Sockets)**
+  Simple and compact, ideal for powering basic gear.  
   [ebay](https://www.ebay.co.uk/itm/163710047824)
-  Simple and compact, ideal for powering basic gear.
 
 - **10” SOHO PDU with IEC Input (UPS-Ready)**
+  Designed to connect directly to a UPS. Features 3x UK sockets and a detachable cable.  
   [ebay](https://www.ebay.co.uk/itm/186307877455)
-  Designed to connect directly to a UPS.  
-  Features 3x UK sockets and a detachable cable.
 
 - **12V＋5V HDD POWER SUPPLY AC 2A FOR HARD DRIVE MOLEX**
+  This is to provide 12v+5v to the disk enclosure  
   [ebay](https://www.ebay.co.uk/itm/186307877455)
-  This is to provide 12v+5v to the disk enclosure
+
 
 ---
 
 ## Patching and cable management
 
-- **GeekPi RackMate Patch Panel** 
+- **GeekPi RackMate Patch Panel**   
   [Amazon UK Link](https://amzn.eu/d/7NtIrBL)
 
-- **DIGITUS Cable Entry Panel** 
+- **DIGITUS Cable Entry Panel**  
   [Amazon UK Link](https://amzn.eu/d/53MpwSx)
 
-- **Digitus cable management panel - 10-inch - 1U** 
+- **Digitus cable management panel - 10-inch - 1U**  
   [Amazon UK Link](https://amzn.eu/d/9G6zwlS)
   
-- **DIGITUS shelf - 1U - 10-inch**
-  This tray is what I use as a mount for my mac mini
+- **DIGITUS shelf - 1U - 10-inch**  
+  This tray is what I use as a mount for my mac mini  
   [Amazon UK Link](https://amzn.eu/d/fQygdA7)
 
 
