@@ -2,89 +2,106 @@
 
 <img width="531" alt="image" src="https://github.com/user-attachments/assets/b3dcd1c4-c842-4775-acb7-eeed36193bc2" /> <img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" /> 
 
-
-
-
-
 ## Overview
 
-This repository documents the components, services, and setup of my personal home lab. Designed for a mix of virtualization, media serving, and home automation, it's a continuously evolving platform for learning and hosting various services. I focused this project on good processing power whilst using low power usage, which is why I decided to go with the hardware below. 
+Welcome to my homelab. This project started with a pretty clear goal: build something that could host my infrastructure in a neat, self-contained unit — something practical, portable, and efficient. I didn’t want a tangle of wires across the room or a power-hungry tower that doubled as a space heater.
 
-## Key Features
+I aimed for a system that ran quietly, consumed low power, was physically mobile (hence, wheels), and required only two cables to get going: power and Ethernet. Despite that simplicity, I still wanted it to be capable enough to handle virtual machines, media streaming, and automation without breaking the bank. This homelab is my way of experimenting, learning, and staying sane — all in one rack.
 
-* **Virtualization:** Proxmox VE for running VMs and LXCs.
-* **Media & Storage:** Dedicated NAS and Plex for media consumption and backups.
-* **Home Automation:** Home Assistant on a Raspberry Pi for smart home control.
-* **Custom Monitoring:** ESP32 with an eInk display for real-time Proxmox status.
-* **Network Services:** Pi-hole for network-wide ad-blocking and DNS.
-* **Management:** Semaphore for Ansible automation and Portainer for Docker management.
+## Why Build This?
 
-## Components
+I needed a central place to learn, experiment, and host the services I use every day. Cloud services are great — until you want more control or get tired of paying for things you could run yourself. So this is part learning platform, part practical utility. 
 
-A detailed breakdown of the hardware and software making up the homelab:
+More than anything, I wanted a setup that:
 
-* **Hardware:**
-    * [Rack Build Components](rack-build.md)
-    * [ESP32 with eInk Screen (Proxmox Status)](https://github.com/r-morato/ESP32-Proxmox-Monitor)
-    * [APC Back-UPS 0.5 KVA 300W](hardware/apc_ups.md)
-    * [Oimaster HE-2006 4-Slot SATA Rack](hardware/oimaster_he2006.md)
-    * [PCIe 1x Express to 4-Port SATA Card](hardware/pcie_sata_card.md)
-    * [Raspberry Pi 4 (Home Assistant)](hardware/raspberry_pi4.md)
-    * [Eero Mesh 6 Wi-Fi (Router)](hardware/eero_mesh_6.md)
-    * [Hive Hub (Heating Management)](hardware/hive_hub.md)
-    * [TP-Link TL-SG108S 8-Port Gigabit Switch](hardware/tp_link_tl_sg108s.md)
-    * [ThinkCentre M720q Tiny](hardware/thinkcentre_q720m.md)
-    * [Mac Mini (Jump Server)](hardware/mac_mini_jump.md)
-    * [QNAP NAS (4TB Mirrored Drives)](hardware/qnap_nas.md)
+- Was efficient and low-noise (it lives near people).
+- Could be moved around easily.
+- Didn't involve spending thousands on enterprise hardware.
+- Could handle a reasonable mix of storage, compute, and networking.
 
-* **Software & Services:**
-    * [Proxmox Virtual Environment](software/proxmox.md)
-    * [Semaphore](software/semaphore.md)
-    * [QNAP NAS Software](software/qnap_software.md)
-    * [Pi-hole](software/pihole.md)
-    * [UptimeKuma](software/uptimekuma.md)
-    * [Portainer](software/portainer.md)
-    * [VS Code Server](software/vscode_server.md)
-    * [Plex Media Server](software/plex.md)
-    * [QBittorrent](software/qbittorrent.md)
-    * [Home Assistant](software/homeassistant.md)
+This was never about building the most powerful or flashy setup — it was about finding the sweet spot between capability, cost, and cleanliness.
 
-## Homelab Services
+## Highlights
 
-Here are the primary services running, categorized by their function:
+Some of the standout features of this setup:
 
-### Servers
-* **Proxmox**: Virtualization environment for hosting VMs and LXCs.
-* **Semaphore**: Manages Ansible automation.
-* **QNAP**: Network-attached storage for data.
-* **Pi-hole**: Network-wide ad-blocking and DNS.
-* **UptimeKuma**: Status monitoring for all services.
-* **Portainer**: Manages Docker containers.
-* **VS Code Server**: Remote VS Code instance for development.
+- **Single-point deployment**: Just plug in power and Ethernet, and the entire lab comes to life.
+- **Proxmox-powered virtualization**: Most services run in either LXCs or lightweight VMs.
+- **Compact and modular**: Rack-mounted, low-profile components to keep things neat and upgrade-friendly.
+- **Power efficient**: All chosen with efficiency in mind — especially the ThinkCentre, which punches above its weight.
 
-### Entertainment
-* **Plex**: Media server for films and TV shows.
-* **QBittorrent**: Torrent client for media acquisition.
+## Core Services
+
+### Virtualization & Infrastructure
+- **Proxmox VE** – My main hypervisor. Runs both VMs and LXCs.
+- **Semaphore** – Manages Ansible playbooks and automations.
+- **Portainer** – Used for managing Docker containers when needed.
+- **VS Code Server** – For editing and maintaining everything remotely.
+
+### Networking & Monitoring
+- **Pi-hole** – Local DNS and ad-blocking.
+- **UptimeKuma** – Uptime monitoring across all services.
+- **ESP32 w/ eInk display** – Custom-built Proxmox dashboard.
+
+### Storage & Media
+- **QNAP NAS (4TB Mirrored)** – Handles all shared storage.
+- **Plex** – Streams my media collection.
+- **QBittorrent** – Lightweight torrenting via web UI.
 
 ### Home Automation
-* **HomeAssistant**: Central hub for home automation.
+- **Home Assistant (Raspberry Pi 4)** – Ties everything in the house together.
+
+## Hardware Breakdown
+
+All parts were chosen for their balance of efficiency, performance, and affordability:
+
+- **ThinkCentre M720q Tiny** – The main workhorse running Proxmox.
+- **QNAP NAS** – Redundant storage for media and backups.
+- **Mac Mini** – Acts as a jump box and quick access point.
+- **Raspberry Pi 4** – Dedicated to Home Assistant.
+- **ESP32 w/ eInk** – Monitors Proxmox stats in real time.
+- **TP-Link TL-SG108S** – 8-Port gigabit switch.
+- **Eero Mesh 6** – Simple and reliable mesh Wi-Fi.
+- **Hive Hub** – Controls heating systems.
+- **APC Back-UPS 300W** – Battery backup for unexpected outages.
+- **Oimaster 4-slot SATA rack** – Quick-swap SATA access.
+- **1x PCIe to 4-port SATA card** – For extending storage inside tight enclosures.
+
+See [Rack Build Components](rack-build.md) for full build notes.
 
 ## Diagrams
 
-Visual representations of the homelab's structure and connectivity:
-* [Network Diagram](diagrams/network-diagram.md)
-* [Rack Diagram](diagrams/rack-diagram.pdf)
+Visualizing the layout and network always helps:
+- [Network Diagram](diagrams/network-diagram.md)
+- [Rack Diagram](diagrams/rack-diagram.pdf)
 
 ## Customizations & 3D Prints
 
-Details on custom solutions and 3D printed components used in the build:
-* [Custom 3D Prints](3d_prints/README.md)
+To keep things neat, I've designed a few parts myself and printed them:
+- [Custom 3D Prints](3d_prints/README.md)
 
+These include brackets, cable guides, and mounts to keep the whole rack tidy and quiet.
+
+## Lessons Learned
+
+This homelab has been an ongoing experiment. A few takeaways so far:
+
+- **Noise matters more than you think** — especially when your servers live near bedrooms.
+- **Cheap gear can take you surprisingly far**, if you're willing to tinker.
+- **Power and thermals aren't optional** — efficiency isn't just about cost, it's about long-term stability.
+- **Having everything in one rack feels great** — way better than scattered gear across shelves and desks.
+- **You will make mistakes** — but the great thing about infrastructure as code and Proxmox snapshots is how easy it is to start fresh.
 
 ## Future Plans
 
-Ongoing developments and planned enhancements for the homelab:
-* Integration of a dedicated firewall/router appliance.
-* Exploration of Kubernetes for container orchestration.
-* Further expansion of storage and backup solutions.
-* Deepening Home Assistant integrations.
+Where I want to go next:
+
+- Add a proper firewall/router appliance (likely something x86-based).
+- Experiment with Kubernetes (likely K3s).
+- Automate more with Ansible, Terraform and GitHub Actions.
+- Expand backup solutions, potentially offsite or cloud-integrated.
+- Increase Home Assistant integrations — more sensors, more automations.
+
+## Final Thoughts
+
+This homelab isn't finished — and probably never will be. That’s kind of the point. It's a place to learn, test ideas, and gradually build toward the ideal personal infrastructure. It might not be flashy, but it’s mine — and that’s what makes it satisfying to keep evolving.
