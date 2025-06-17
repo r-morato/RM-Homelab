@@ -1,88 +1,140 @@
 # Rack Build Components
 
-This section details the custom-built physical enclosure and mounting solutions that form the backbone of the homelab. I based my design on the GeekPi 8U rack, I initially planned to purchase it however it was not available in my country and I felt like I could do something pretty similar without breaking the bank. 
+This section outlines the custom-built enclosure and mounting setup that forms the physical foundation of my homelab.
+
+Originally, I had planned to buy the **GeekPi 8U Rack**, but it wasn’t available locally. Rather than overpay for shipping or compromise, I decided to build my own version — with a focus on modularity, affordability, and clean design.
 
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/c838a7d2-b6ab-43d4-aebb-ba36a7a60ff8" />
 
+---
 
-## Initial 3D renders
-<img width="616" alt="image" src="https://github.com/user-attachments/assets/f481e324-415e-4707-a65e-6ea06317e182" /><img width="550" alt="image" src="https://github.com/user-attachments/assets/2379e38c-b208-4b4e-971b-3876f66c33f2" />
+## Initial 3D Renders
+
+These early mockups helped plan the layout and dimensions before committing to cutting and drilling.
+
+<img width="616" alt="image" src="https://github.com/user-attachments/assets/f481e324-415e-4707-a65e-6ea06317e182" />
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/2379e38c-b208-4b4e-971b-3876f66c33f2" />
+
+---
 
 ## Build Progress
-<img width="418" alt="image" src="https://github.com/user-attachments/assets/e6fa72c9-3254-439b-ac3b-530a314c1241" /><img width="426" alt="image" src="https://github.com/user-attachments/assets/5e81913e-e11e-4161-b8c8-94687ab118e5" />
-<img width="466" alt="image" src="https://github.com/user-attachments/assets/f93d114e-7681-438f-84ee-db0ac5e2156b" /><img width="460" alt="image" src="https://github.com/user-attachments/assets/19988fa2-2e88-4998-9a24-4950a8a08b20" />
-<img width="356" alt="image" src="https://github.com/user-attachments/assets/7f82542f-f7e4-44d9-9e92-540f3b61dbbc" /><img width="384" alt="image" src="https://github.com/user-attachments/assets/ae049537-af08-4b88-b6a7-9d310f2d8af9" />
 
-## Structure & Enclosure
+Here’s how things came together during the build process:
 
-The entire rack structure is custom-built using standard components, providing a sturdy and modular frame.
+<img width="418" alt="image" src="https://github.com/user-attachments/assets/e6fa72c9-3254-439b-ac3b-530a314c1241" />
+<img width="426" alt="image" src="https://github.com/user-attachments/assets/5e81913e-e11e-4161-b8c8-94687ab118e5" />
+<img width="466" alt="image" src="https://github.com/user-attachments/assets/f93d114e-7681-438f-84ee-db0ac5e2156b" />
+<img width="460" alt="image" src="https://github.com/user-attachments/assets/19988fa2-2e88-4998-9a24-4950a8a08b20" />
+<img width="356" alt="image" src="https://github.com/user-attachments/assets/7f82542f-f7e4-44d9-9e92-540f3b61dbbc" />
+<img width="384" alt="image" src="https://github.com/user-attachments/assets/ae049537-af08-4b88-b6a7-9d310f2d8af9" />
 
-* **Extruded Aluminum Profiles (20x20mm):**
-    * **Description:** The primary structural elements, forming the vertical posts and horizontal cross-members of the rack. Their modular nature allows for precise assembly and future modifications.
-    * **Function:** Provides the main frame to which all other components are attached.
-* **Corners:**
-    * **Description:** Specifically designed connectors for 20x20mm aluminum profiles, providing rigid 90-degree joints for the frame.
-    * **Link:** [Amazon UK Link](https://www.amazon.co.uk/dp/B0CPL6DDYH?ref=ppx_yo2ov_dt_b_fed_asin_title)
-    * **Function:** Securely joins the aluminum profiles to create the rectangular frame of the rack.
-* **M5 T-Slot Bolts and Nuts:**
-    * **Description:** Specialized fasteners designed to slide into the T-slots of the aluminum profiles, allowing for versatile attachment of components.
-    * **Link:** [Amazon UK Link](https://www.amazon.co.uk/dp/B0CDBY3PHR?ref=ppx_yo2ov_dt_b_fed_asin_title)
-    * **Function:** Used to assemble the aluminum frame and attach various accessories, including the rack ears and other mounting solutions.
-* **Acrylic Side Panels (Custom Cut):**
-    * **Description:** Clear acrylic sheets cut to size, forming the side enclosures of the rack.
-    * **Link:** [Plastic Sheets Custom Cut](https://www.plasticsheets.com/clear-acrylic-sheet-cut-to-size/)
-    * **Function:** Enclose the rack, providing protection for the internal components while allowing visibility of the hardware.
-* **Hard Slot Cover Flat Seal Panel Holders:**
-    * **Description:** Lengths of flat seals designed to fit into the aluminum profile slots, potentially used to secure the acrylic panels or cover unused slots for a cleaner look.
-    * **Function:** Provides a flush finish and helps secure panels or prevent dust ingress.
-* **Top Handles (Aluminum Cabinet Handles):**
-    * **Description:** Durable aluminum handles mounted on the top of the rack.
-    * **Link:** [AliExpress Link (Similar to provided description)](https://www.aliexpress.com/item/1005004133524750.html?spm=a2g0o.cart.0.0.128738dao2uEzj&mp=1&pdp_npi=5%40dis%21GBP%21GBP%203.23%21GBP%203.23%21%21%21%21%21%40211b61a417410326081112704efc3b%2112000028145701929%21ct%21UK%212280467646%21%211%210)
-    * **Function:** Facilitates easy portability and movement of the entire rack.
-* **Wheels (1-inch Small Furniture Caster Wheels):**
-    * **Description:** Low-profile rubber caster wheels attached to the base of the rack.
-    * **Function:** Allows the rack to be easily moved and repositioned without lifting.
+---
+
+## Rack Frame & Enclosure Materials
+
+Everything is based on a modular aluminum profile system, with side panels and internal mounts added using a mix of off-the-shelf and custom components.
+
+### Structural Frame
+
+- **Extruded Aluminum Profiles (20x20mm)**  
+  The core of the frame — lightweight, strong, and modular.
+  
+- **Corner Connectors**  
+  [Amazon UK Link](https://www.amazon.co.uk/dp/B0CPL6DDYH?ref=ppx_yo2ov_dt_b_fed_asin_title)  
+  For rigid 90° joints between profiles.
+
+- **M5 T-Slot Bolts & Nuts**  
+  [Amazon UK Link](https://www.amazon.co.uk/dp/B0CDBY3PHR?ref=ppx_yo2ov_dt_b_fed_asin_title)  
+  Used throughout for adjustable, tool-free component mounting.
+
+### Panels & Seals
+
+- **Acrylic Side Panels (Clear, Custom Cut)**  
+  [plasticsheets.com](https://www.plasticsheets.com/clear-acrylic-sheet-cut-to-size/)  
+  Keeps the rack enclosed but visible for aesthetics and protection.
+
+- **Flat Seal Panel Holders**  
+  Slotted into aluminum rails to hold acrylic securely and help reduce dust ingress.
+
+### Mobility & Handling
+
+- **Top-Mounted Aluminum Handles**  
+  [AliExpress Example](https://www.aliexpress.com/item/1005004133524750.html)  
+  Makes it easy to move the rack when needed.
+
+- **1” Low-Profile Caster Wheels**  
+  For smooth repositioning on floors — no heavy lifting required.
+
+---
 
 ## Rack Mounting Components
 
-Standard and custom solutions are used to mount the hardware within the 10-inch rack frame.
+While it's a 10-inch rack footprint, many mounts are custom-made or adapted to fit non-standard devices.
 
-* **10-inch Rack Ears:**
-    * **Description:** Standard rack ears designed for 10-inch wide equipment, likely adapted or used with custom mounts for various devices.
-    * **Link:** [Amazon UK Link](https://www.amazon.co.uk/dp/B00LFSC3K6?ref=ppx_yo2ov_dt_b_fed_asin_title)
-    * **Function:** Provides the mounting points for rack-compatible devices or custom 3D printed brackets that secure devices to the rack's frame.
-* **Perforated Aluminum Sheets:**
-    * **Description:** 3mm thick sheets with 10mm diameter holes, used for custom shelves or panels.
-    * **Function:** Can be cut and shaped to create custom shelves, blanks, or ventilation panels, offering flexible mounting options for non-rack-standard equipment.
+- **10” Rack Ears**  
+  [Amazon UK Link](https://www.amazon.co.uk/dp/B00LFSC3K6?ref=ppx_yo2ov_dt_b_fed_asin_title)  
+  Standard rack brackets used in combination with custom prints.
+
+- **Perforated Aluminum Sheets**  
+  3mm thick, 10mm holes. Used to create shelves, blanks, or airflow panels.
+
+---
 
 ## Power Distribution
 
-Efficient power management within the rack is handled by dedicated Power Distribution Units (PDUs).
+Internal power is handled by compact 10” PDUs designed for SOHO setups.
 
-* **10" 4-Way Horizontal Power Distribution Unit (PDU) Strip UK Miniline:**
-    * **Description:** A compact PDU designed for 10-inch racks, featuring 4 UK sockets.
-    * **Function:** Provides easily accessible power outlets for the devices within the rack, streamlining cable management.
-* **10" SOHO DETACHABLE 1x IEC 3x UK Horizontal Power Unit Strip PDU UPS Rack Mount:**
-    * **Description:** Another 10-inch rack-mountable PDU, offering 3 UK sockets and an IEC input, ideal for connecting to a UPS.
-    * **Function:** Supplies power to devices and is designed to connect directly to the UPS for protected power distribution.
+- **4-Way 10” Horizontal PDU (UK Sockets)**  
+  Simple and compact, ideal for powering basic gear.
 
-## 3D Printed Custom Mounts
+- **10” SOHO PDU with IEC Input (UPS-Ready)**  
+  Designed to connect directly to a UPS.  
+  Features 3x UK sockets and a detachable cable.
 
-Several components are integrated into the rack using custom 3D printed solutions, detailed further in the [Custom 3D Prints](3d_prints/README.md) section. These prints provide tailored mounting for specific devices, optimizing space and airflow.
+---
 
-* **Raspberry Pi 3B/4B/5B 10-inch Rack Mount:**
-    * **Description:** A custom bracket for securely mounting the Raspberry Pi into a 10-inch rack slot.
-    * **Link:** [Printables.com Link](https://www.printables.com/model/1185545-raspberry-pi-3b4b5b-10-inch-rack-mount/files)
-* **Sturdy 10-inch Rack Mount for TP-Link TL-SG108:**
-    * **Description:** A tailored mount ensuring the TP-Link switch fits neatly into the 10-inch rack.
-    * **Link:** [Printables.com Link](https://www.printables.com/model/967188-sturdy-10-inch-rack-mount-for-the-tl-sg108-consume/files)
-* **ThinkCentre M720q/M920q Rack Mount:**
-    * **Description:** A specific mount for the ThinkCentre Tiny PC, allowing it to be securely installed in the rack.
-    * **Link:** [Thingiverse.com Link](https://www.thingiverse.com/thing:6859441)
-* **Custom plate for eInk screen:**
-    * **Made this one by measuring the screen and printing a mount that fitted it perfectly
+## Patching and cable management
 
+- **GeekPi RackMate Patch Panel** 
+  [Amazon UK Link](https://amzn.eu/d/7NtIrBL)
 
+- **DIGITUS Cable Entry Panel** 
+  [Amazon UK Link](https://amzn.eu/d/53MpwSx)
+
+- **Digitus cable management panel - 10-inch - 1U** 
+  [Amazon UK Link](https://amzn.eu/d/9G6zwlS)
+  
+- **DIGITUS shelf - 1U - 10-inch** 
+  [Amazon UK Link](https://amzn.eu/d/fQygdA7)
 
 
+---
 
+## 3D Printed Mounts
+
+A key part of the build — these mounts allow non-rack devices to fit securely and efficiently.
+
+All files and links are documented in the [Custom 3D Prints](../3d_prints/README.md) section.
+
+- **Raspberry Pi 3B/4B/5B Rack Mount**  
+  [Printables.com](https://www.printables.com/model/1185545-raspberry-pi-3b4b5b-10-inch-rack-mount/files)
+
+- **TP-Link TL-SG108 Switch Mount**  
+  [Printables.com](https://www.printables.com/model/967188-sturdy-10-inch-rack-mount-for-the-tl-sg108-consume/files)
+
+- **5.25" Drive Adapter Mount**  
+  [Thingiverse](https://www.thingiverse.com/thing:6859441)
+
+- **ThinkCentre M720q/M920q Mount**  
+  [Printables.com](https://www.printables.com/model/1040412-lenovo-thinkcentre-tiny-m720qm715qm920q-10-rack-mo)
+
+- **eInk Display Mount**  
+  Custom-designed to match the screen dimensions. Not publicly uploaded (yet), but might share it later.
+
+---
+
+## Summary
+
+This rack was built to be practical, minimal, and tailored to my needs — not just a clone of something from Amazon. Using a mix of aluminum framing, custom-cut panels, and 3D prints, I was able to keep the size down while still allowing for proper rack-mounting and cable management.
+
+Everything is modular and easy to adapt. Whether I’m swapping hardware, expanding storage, or moving the setup to a new room, the enclosure keeps up without needing a full rebuild.
