@@ -37,7 +37,7 @@ Everything is based on a modular aluminum profile system, with side panels and i
 ### Structural Frame
 
 - **Extruded Aluminum Profiles (20x20mm)**  
-  The core of the frame — lightweight, strong, and modular. 
+  The core of the frame — lightweight, strong, and modular.  
   [ebay](https://www.ebay.co.uk/itm/305826763149?var=604998211152)  
  
   
