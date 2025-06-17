@@ -40,31 +40,31 @@ Everything is based on a modular aluminum profile system, with side panels and i
   [ebay](https://www.ebay.co.uk/itm/305826763149?var=604998211152)
   The core of the frame — lightweight, strong, and modular.
   
-- **Corner Connectors**  
+- **Corner Connectors**
   [Amazon UK Link](https://www.amazon.co.uk/dp/B0CPL6DDYH?ref=ppx_yo2ov_dt_b_fed_asin_title)  
   For rigid 90° joints between profiles.
 
-- **M5 T-Slot Bolts & Nuts**  
+- **M5 T-Slot Bolts & Nuts**
   [Amazon UK Link](https://www.amazon.co.uk/dp/B0CDBY3PHR?ref=ppx_yo2ov_dt_b_fed_asin_title)  
   Used throughout for adjustable, tool-free component mounting.
 
 ### Panels & Seals
 
-- **Acrylic Side Panels (Clear, Custom Cut)**  
+- **Acrylic Side Panels (Clear, Custom Cut)**
   [plasticsheets.com](https://www.plasticsheets.com/clear-acrylic-sheet-cut-to-size/)  
   Keeps the rack enclosed but visible for aesthetics and protection.
 
-- **Flat Seal Panel Holders** 
+- **Flat Seal Panel Holders**
   [AliExpress](https://www.aliexpress.com/item/1005003222704634.html?spm=a2g0o.order_list.order_list_main.25.270b1802RzCqnd)
   Slotted into aluminum rails to hold acrylic securely and help reduce dust ingress.
 
 ### Mobility & Handling
 
-- **Top-Mounted Aluminum Handles**  
+- **Top-Mounted Aluminum Handles**
   [AliExpress](https://www.aliexpress.com/item/1005006105161997.html?spm=a2g0o.order_list.order_list_main.15.270b1802RzCqnd)
   Makes it easy to move the rack when needed.
 
-- **1” Low-Profile Caster Wheels**  
+- **1” Low-Profile Caster Wheels**
   For smooth repositioning on floors — no heavy lifting required.
   [AliExpress](https://www.aliexpress.com/item/1005007219086138.html?spm=a2g0o.order_list.order_list_main.5.270b1802RzCqnd)  
 ---
@@ -73,7 +73,7 @@ Everything is based on a modular aluminum profile system, with side panels and i
 
 While it's a 10-inch rack footprint, many mounts are custom-made or adapted to fit non-standard devices.
 
-- **10” Rack Ears**  
+- **10” Rack Ears**
   [Amazon UK Link](https://www.amazon.co.uk/dp/B00LFSC3K6?ref=ppx_yo2ov_dt_b_fed_asin_title)  
   Standard rack brackets used in combination with custom prints.
 
