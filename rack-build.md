@@ -36,7 +36,8 @@ Everything is based on a modular aluminum profile system, with side panels and i
 
 ### Structural Frame
 
-- **Extruded Aluminum Profiles (20x20mm)**  
+- **Extruded Aluminum Profiles (20x20mm)**
+  ebay
   The core of the frame — lightweight, strong, and modular.
   
 - **Corner Connectors**  
@@ -53,18 +54,19 @@ Everything is based on a modular aluminum profile system, with side panels and i
   [plasticsheets.com](https://www.plasticsheets.com/clear-acrylic-sheet-cut-to-size/)  
   Keeps the rack enclosed but visible for aesthetics and protection.
 
-- **Flat Seal Panel Holders**  
+- **Flat Seal Panel Holders** 
+  [AliExpress](https://www.aliexpress.com/item/1005003222704634.html?spm=a2g0o.order_list.order_list_main.25.270b1802RzCqnd)
   Slotted into aluminum rails to hold acrylic securely and help reduce dust ingress.
 
 ### Mobility & Handling
 
 - **Top-Mounted Aluminum Handles**  
-  [AliExpress Example](https://www.aliexpress.com/item/1005004133524750.html)  
+  [AliExpress](https://www.aliexpress.com/item/1005006105161997.html?spm=a2g0o.order_list.order_list_main.15.270b1802RzCqnd)
   Makes it easy to move the rack when needed.
 
 - **1” Low-Profile Caster Wheels**  
   For smooth repositioning on floors — no heavy lifting required.
-
+  [AliExpress](https://www.aliexpress.com/item/1005007219086138.html?spm=a2g0o.order_list.order_list_main.5.270b1802RzCqnd)  
 ---
 
 ## Rack Mounting Components
@@ -75,7 +77,8 @@ While it's a 10-inch rack footprint, many mounts are custom-made or adapted to f
   [Amazon UK Link](https://www.amazon.co.uk/dp/B00LFSC3K6?ref=ppx_yo2ov_dt_b_fed_asin_title)  
   Standard rack brackets used in combination with custom prints.
 
-- **Perforated Aluminum Sheets**  
+- **Perforated Aluminum Sheets**
+  [ebay](https://www.ebay.co.uk/itm/305840202662?var=605028245526)
   3mm thick, 10mm holes. Used to create shelves, blanks, or airflow panels.
 
 ---
@@ -84,12 +87,18 @@ While it's a 10-inch rack footprint, many mounts are custom-made or adapted to f
 
 Internal power is handled by compact 10” PDUs designed for SOHO setups.
 
-- **4-Way 10” Horizontal PDU (UK Sockets)**  
+- **4-Way 10” Horizontal PDU (UK Sockets)**
+  [ebay](https://www.ebay.co.uk/itm/163710047824)
   Simple and compact, ideal for powering basic gear.
 
-- **10” SOHO PDU with IEC Input (UPS-Ready)**  
+- **10” SOHO PDU with IEC Input (UPS-Ready)**
+  [ebay](https://www.ebay.co.uk/itm/186307877455)
   Designed to connect directly to a UPS.  
   Features 3x UK sockets and a detachable cable.
+
+- **12V＋5V HDD POWER SUPPLY AC 2A FOR HARD DRIVE MOLEX**
+  [ebay](https://www.ebay.co.uk/itm/186307877455)
+  This is to provide 12v+5v to the disk enclosure
 
 ---
 
@@ -104,7 +113,8 @@ Internal power is handled by compact 10” PDUs designed for SOHO setups.
 - **Digitus cable management panel - 10-inch - 1U** 
   [Amazon UK Link](https://amzn.eu/d/9G6zwlS)
   
-- **DIGITUS shelf - 1U - 10-inch** 
+- **DIGITUS shelf - 1U - 10-inch**
+  This tray is what I use as a mount for my mac mini
   [Amazon UK Link](https://amzn.eu/d/fQygdA7)
 
 
