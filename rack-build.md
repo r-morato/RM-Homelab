@@ -53,24 +53,24 @@ Everything is based on a modular aluminum profile system, with side panels and i
 
 ### Panels & Seals
 
-- **Acrylic Side Panels (Clear, Custom Cut)**
+- **Acrylic Side Panels (Clear, Custom Cut)**  
   Keeps the rack enclosed but visible for aesthetics and protection.  
   [plasticsheets.com](https://www.plasticsheets.com/clear-acrylic-sheet-cut-to-size/)  
 
 
-- **Flat Seal Panel Holders**
+- **Flat Seal Panel Holders**  
   Slotted into aluminum rails to hold acrylic securely and help reduce dust ingress.  
   [AliExpress](https://www.aliexpress.com/item/1005003222704634.html?spm=a2g0o.order_list.order_list_main.25.270b1802RzCqnd)
 
 
 ### Mobility & Handling
 
-- **Top-Mounted Aluminum Handles**
+- **Top-Mounted Aluminum Handles**  
   Makes it easy to move the rack when needed.  
   [AliExpress](https://www.aliexpress.com/item/1005006105161997.html?spm=a2g0o.order_list.order_list_main.15.270b1802RzCqnd)
 
 
-- **1” Low-Profile Caster Wheels**
+- **1” Low-Profile Caster Wheels**  
   For smooth repositioning on floors — no heavy lifting required.  
   [AliExpress](https://www.aliexpress.com/item/1005007219086138.html?spm=a2g0o.order_list.order_list_main.5.270b1802RzCqnd)  
 ---
@@ -79,13 +79,13 @@ Everything is based on a modular aluminum profile system, with side panels and i
 
 While it's a 10-inch rack footprint, many mounts are custom-made or adapted to fit non-standard devices.
 
-- **10” Rack Ears**
-  Standard rack brackets used in combination with custom prints. They required to be perforated to properly fit into the aluminium profiles.
+- **10” Rack Ears**  
+  Standard rack brackets used in combination with custom prints. They required to be perforated to properly fit into the aluminium profiles.  
   [Amazon UK Link](https://www.amazon.co.uk/dp/B00LFSC3K6?ref=ppx_yo2ov_dt_b_fed_asin_title)  
 
 
-- **Perforated Aluminum Sheets**
-  3mm thick, 10mm holes. Used to create shelves, blanks, or airflow panels.
+- **Perforated Aluminum Sheets**  
+  3mm thick, 10mm holes. Used to create shelves, blanks, or airflow panels.  
   [ebay](https://www.ebay.co.uk/itm/305840202662?var=605028245526)
 
 ---
@@ -94,15 +94,15 @@ While it's a 10-inch rack footprint, many mounts are custom-made or adapted to f
 
 Internal power is handled by compact 10” PDUs designed for SOHO setups.
 
-- **4-Way 10” Horizontal PDU (UK Sockets)**
+- **4-Way 10” Horizontal PDU (UK Sockets)**  
   Simple and compact, ideal for powering basic gear.  
   [ebay](https://www.ebay.co.uk/itm/163710047824)
 
-- **10” SOHO PDU with IEC Input (UPS-Ready)**
+- **10” SOHO PDU with IEC Input (UPS-Ready)**  
   Designed to connect directly to a UPS. Features 3x UK sockets and a detachable cable.  
   [ebay](https://www.ebay.co.uk/itm/186307877455)
 
-- **12V＋5V HDD POWER SUPPLY AC 2A FOR HARD DRIVE MOLEX**
+- **12V＋5V HDD POWER SUPPLY AC 2A FOR HARD DRIVE MOLEX**  
   This is to provide 12v+5v to the disk enclosure  
   [ebay](https://www.ebay.co.uk/itm/186307877455)
 
@@ -146,7 +146,7 @@ All files and links are documented in the [Custom 3D Prints](../3d_prints/README
   [Printables.com](https://www.printables.com/model/1040412-lenovo-thinkcentre-tiny-m720qm715qm920q-10-rack-mo)
 
 - **eInk Display Mount**  
-  Custom-designed to match the screen dimensions. Not publicly uploaded (yet), but might share it later.
+  Custom-designed to match the screen dimensions. Not publicly uploaded (yet), but might share it later.  
 
 ---
 
