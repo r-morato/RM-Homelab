@@ -1,6 +1,8 @@
 # RM-Homelab
 
-<img width="531" alt="image" src="https://github.com/user-attachments/assets/b3dcd1c4-c842-4775-acb7-eeed36193bc2" /> <img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" /> 
+ <img width="583" height="892" alt="Screenshot 2025-07-17 at 16 37 44" src="https://github.com/user-attachments/assets/839070fc-07c0-4ad8-93b7-052136dc8fb8" /> <img width="536" height="898" alt="Screenshot 2025-07-17 at 16 38 14" src="https://github.com/user-attachments/assets/35756d36-ad88-4a62-8a9e-c93d74f3043a" />
+
+<img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" /> 
 
 ## Overview
 
