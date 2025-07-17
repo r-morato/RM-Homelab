@@ -1,14 +1,15 @@
 # RM-Homelab
 
- <img width="583" height="892" alt="Screenshot 2025-07-17 at 16 37 44" src="https://github.com/user-attachments/assets/839070fc-07c0-4ad8-93b7-052136dc8fb8" /> <img width="536" height="898" alt="Screenshot 2025-07-17 at 16 38 14" src="https://github.com/user-attachments/assets/35756d36-ad88-4a62-8a9e-c93d74f3043a" />
+ <img width="583" height="892" alt="Screenshot 2025-07-17 at 16 37 44" src="https://github.com/user-attachments/assets/839070fc-07c0-4ad8-93b7-052136dc8fb8" /> 
 
-<img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" /> 
 
 ## Overview
 
 Welcome to my homelab. This project started with a pretty clear goal: build something that could host my infrastructure in a neat, self-contained unit — something practical, portable, and efficient. I didn’t want a tangle of wires across the room or a power-hungry tower that doubled as a space heater.
 
 I aimed for a system that ran quietly, consumed low power, was physically mobile (hence, wheels), and required only two cables to get going: power and Ethernet. Despite that simplicity, I still wanted it to be capable enough to handle virtual machines, media streaming, and automation without breaking the bank. This homelab is my way of experimenting, learning, and staying sane — all in one rack.
+
+<img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" /> 
 
 ## Why Build This?
 
@@ -22,6 +23,8 @@ More than anything, I wanted a setup that:
 - Could handle a reasonable mix of storage, compute, and networking.
 
 This was never about building the most powerful or flashy setup — it was about finding the sweet spot between capability, cost, and cleanliness.
+
+<img width="536" height="898" alt="Screenshot 2025-07-17 at 16 38 14" src="https://github.com/user-attachments/assets/35756d36-ad88-4a62-8a9e-c93d74f3043a" />
 
 ## Highlights
 
