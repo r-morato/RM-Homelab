@@ -6,7 +6,7 @@ All models are either downloaded from trusted sources or custom-designed to fit 
 
 ---
 
-## 📦 3D Printed Parts List
+## 3D Printed Parts List
 
 | Component                          | Source / Link                                                                 |
 |-----------------------------------|-------------------------------------------------------------------------------|
@@ -18,7 +18,7 @@ All models are either downloaded from trusted sources or custom-designed to fit 
 
 ---
 
-## 🧠 Design Considerations
+## Design Considerations
 
 Each 3D printed part was created or selected with the following goals in mind:
 
@@ -43,7 +43,7 @@ A few designs are in progress or under consideration to further improve the setu
 
 ---
 
-## 📁 File Access
+## File Access
 
 If you're looking for all print-ready files and design sources, check the repo’s `3d_prints/` directory. Some prints are original; others are remixed from open-source models (attribution included in each subfolder).
 
