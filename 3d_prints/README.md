@@ -33,7 +33,7 @@ Each 3D printed part was created or selected with the following goals in mind:
 
 ---
 
-## 🛠️ Future Print Ideas
+##  Future Print Ideas
 
 A few designs are in progress or under consideration to further improve the setup:
 
