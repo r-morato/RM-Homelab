@@ -1,4 +1,4 @@
-# Hive Hub — heating control
+# Hive Hub - heating control
 
 The manufacturer hub for the home's Hive smart heating (thermostat + schedule). Powered
 from the rack's 6-port USB charger, sat on top of the rack to keep its radio clear of

@@ -5,7 +5,7 @@ dedicated control container and a [Semaphore](https://github.com/semaphoreui/sem
 web UI.
 
 It replaces an earlier weekly cron on a hypervisor that did
-`bash -c "$(curl -fsSL https://.../update-lxcs-cron.sh)"` as root — an unpinned
+`bash -c "$(curl -fsSL https://.../update-lxcs-cron.sh)"` as root - an unpinned
 `curl | bash` from a third-party repo, with no pre-backup and no report. See
 [`../docs/automation.md`](../docs/automation.md) and
 [`../docs/patching.md`](../docs/patching.md) for the design write-up; this README is the
@@ -36,7 +36,7 @@ operator reference.
 ```
 
 * The control container reaches every target over the **LAN segment**, never the
-  storage/cluster segment — corosync runs there as a single ring and management
+  storage/cluster segment - corosync runs there as a single ring and management
   traffic is kept off it.
 * The control container holds root SSH access to the entire cluster, so it is the most
   sensitive guest: unprivileged, `nesting=0,keyctl=0`, key-only SSH, per-guest firewall
@@ -49,7 +49,7 @@ operator reference.
 | Job | Playbook | Schedule (Semaphore) | Disruptive? |
 |---|---|---|---|
 | Patch containers | `playbooks/patch-guests.yml` | weekly, Sat 02:00 | pre-backup + `dist-upgrade` in place; no reboot (opt-in `-e allow_reboot=true`) |
-| Patch hypervisors | `playbooks/patch-hosts.yml` | monthly, 1st Sun 03:00 | `dist-upgrade` **in place** — no reboot, no HA drain, guests untouched; reports "reboot required" |
+| Patch hypervisors | `playbooks/patch-hosts.yml` | monthly, 1st Sun 03:00 | `dist-upgrade` **in place** - no reboot, no HA drain, guests untouched; reports "reboot required" |
 | Reboot hypervisors | `playbooks/reboot-hosts.yml` | **manual only** | drains HA + reboots, one node at a time; won't touch the node hosting the control container |
 | Connectivity check | `playbooks/ping.yml` | on demand | none |
 
@@ -62,11 +62,11 @@ hands-on action.
 ```
 ansible/
 ├── ansible.cfg                 # inventory path, ssh tuning, stdout callback
-│                               # (no requirements.yml at root — collections come
+│                               # (no requirements.yml at root - collections come
 │                               #  from the Debian `ansible` package; see docs/)
 ├── inventory/
 │   ├── hosts.example.yml       # committed, placeholder addresses
-│   └── hosts.yml               # gitignored — the real inventory
+│   └── hosts.yml               # gitignored - the real inventory
 ├── roles/
 │   ├── apt_upgrade/            # idempotent update+upgrade, records facts for the summary
 │   ├── pve_node_patch/         # dist-upgrade a node in place, flag if a reboot is due
@@ -82,8 +82,8 @@ ansible/
 │   ├── patch-hosts.yml         # patch both nodes, serial 1, no reboot, notify
 │   └── reboot-hosts.yml        # rolling reboot, manual
 ├── bootstrap/
-│   ├── 01-create-control-node.sh    # run on a PVE node — builds the control container
-│   ├── 02-deploy-control-node-key.sh # run on a PVE node — authorises it everywhere
+│   ├── 01-create-control-node.sh    # run on a PVE node - builds the control container
+│   ├── 02-deploy-control-node-key.sh # run on a PVE node - authorises it everywhere
 │   └── semaphore/              # API scripts that recreate the Semaphore project objects
 └── docs/
     ├── control-node.md         # build + harden the control container
@@ -109,8 +109,7 @@ carries the failing lines into the run summary as `[repo warnings]`. Any other r
 
 ### Patching a hypervisor (`pve_node_patch`)
 
-`serial: 1`, and per node just `apt dist-upgrade` **in place**. No reboot, no HA drain —
-installing packages doesn't disturb running guests, and draining every guest to the
+`serial: 1`, and per node just `apt dist-upgrade` **in place**. No reboot, no HA drain - installing packages doesn't disturb running guests, and draining every guest to the
 other node (and back) merely to install packages is both disruptive and self-defeating
 here: the control container is itself an HA guest and would be migrated out from under
 the running playbook. If a node ends up needing a reboot, the run says so.
@@ -130,14 +129,14 @@ the running playbook. If a node ends up needing a reboot, the run says so.
    `wait_for` port 8006.
 5. `node-maintenance disable`; on the affinity-preferred node, poll until guests return.
 
-This is the exact by-hand sequence from a kernel upgrade, codified — minus the part
+This is the exact by-hand sequence from a kernel upgrade, codified - minus the part
 where you have to remember not to strand yourself.
 
 ### Notifications
 
 `notify_webhook` POSTs `{"title": …, "message": …}` to the URL in the real inventory (a
 phone-push endpoint). Messages are hard-truncated to ~3.5 KB because that endpoint
-returns HTTP 500 for bodies over ~5–7 KB. A failed notification is logged, never fatal.
+returns HTTP 500 for bodies over ~5-7 KB. A failed notification is logged, never fatal.
 
 ## 5. First-time setup
 
@@ -153,7 +152,7 @@ See [`docs/control-node.md`](docs/control-node.md) then
 pct exec 109 -- install -d /opt/ansible
 tar -C .. -cf - ansible | pct exec 109 -- tar -C /opt -xf -
 
-# inside the container (collections ship with the Debian `ansible` package — no galaxy step)
+# inside the container (collections ship with the Debian `ansible` package - no galaxy step)
 cd /opt/ansible
 cp inventory/hosts.example.yml inventory/hosts.yml   # then edit with real values
 ansible-playbook playbooks/ping.yml                  # verify reachability
@@ -175,7 +174,7 @@ ansible-playbook playbooks/reboot-hosts.yml                     # when a reboot 
 
 ### Rebooting the nodes
 
-`patch-hosts.yml` never reboots and never drains — it just installs packages one node
+`patch-hosts.yml` never reboots and never drains - it just installs packages one node
 at a time. When it reports a node needs a reboot, `reboot-hosts.yml` does the
 drain → reboot → wait-for-quorum → un-drain cycle, **but it will not reboot the node
 currently hosting the control container** (that would kill the run). On this 2-node
@@ -192,16 +191,16 @@ ansible-playbook playbooks/reboot-hosts.yml --limit <first> -e control_node_relo
 
 For a new guest that should be patched:
 
-1. **Inventory** — add it under `lxc_guests` in `inventory/hosts.yml` (and
+1. **Inventory** - add it under `lxc_guests` in `inventory/hosts.yml` (and
    `backup_protected` if it's on the vzdump job). The playbooks iterate the group, so
    nothing else changes.
-2. **Semaphore** uses a *static* copy of that inventory — update it too:
+2. **Semaphore** uses a *static* copy of that inventory - update it too:
    Semaphore → project → Inventory → `production` → edit, or re-paste `hosts.yml`.
-3. **SSH access** — `bootstrap/02-deploy-control-node-key.sh` (add the new id to
+3. **SSH access** - `bootstrap/02-deploy-control-node-key.sh` (add the new id to
    `GUEST_IDS`) or a one-off `pct exec <id> -- ...` to drop the `from="<control IP>"`
    key into `root@`'s `authorized_keys`. If the guest has `AllowUsers` in sshd, add the
    `20-ansible.conf` drop-in (see `docs/control-node.md` §3a).
-4. **HA** (recommended for anything that matters) — `ha-manager add ct:<id>
+4. **HA** (recommended for anything that matters) - `ha-manager add ct:<id>
    --state started` and add `ct:<id>` to the node-affinity rule's `resources`.
 
 > The step-2 double entry is the price of keeping `hosts.yml` out of git. If you add

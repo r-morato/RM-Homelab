@@ -2,7 +2,7 @@
 
 This section outlines the custom-built enclosure and mounting setup that forms the physical foundation of my homelab.
 
-Originally, I had planned to buy the **GeekPi 8U Rack**, but it wasn’t available locally. Rather than overpay for shipping or compromise, I decided to build my own version — with a focus on modularity, affordability, and clean design.
+Originally, I had planned to buy the **GeekPi 8U Rack**, but it wasn’t available locally. Rather than overpay for shipping or compromise, I decided to build my own version - with a focus on modularity, affordability, and clean design.
 
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/c838a7d2-b6ab-43d4-aebb-ba36a7a60ff8" />
 
@@ -37,7 +37,7 @@ Everything is based on a modular aluminum profile system, with side panels and i
 ### Structural Frame
 
 - **Extruded Aluminum Profiles (20x20mm)**  
-  The core of the frame — lightweight, strong, and modular.  
+  The core of the frame - lightweight, strong, and modular.  
   [ebay](https://www.ebay.co.uk/itm/305826763149?var=604998211152)  
  
   
@@ -71,7 +71,7 @@ Everything is based on a modular aluminum profile system, with side panels and i
 
 
 - **1” Low-Profile Caster Wheels**  
-  For smooth repositioning on floors — no heavy lifting required.  
+  For smooth repositioning on floors - no heavy lifting required.  
   [AliExpress](https://www.aliexpress.com/item/1005007219086138.html?spm=a2g0o.order_list.order_list_main.5.270b1802RzCqnd)  
 ---
 
@@ -129,7 +129,7 @@ Internal power is handled by compact 10” PDUs designed for SOHO setups.
 
 ## 3D Printed Mounts
 
-A key part of the build — these mounts allow non-rack devices to fit securely and efficiently.
+A key part of the build - these mounts allow non-rack devices to fit securely and efficiently.
 
 All files and links are documented in the [Custom 3D Prints](3d_prints/README.md) section.
 
@@ -152,6 +152,6 @@ All files and links are documented in the [Custom 3D Prints](3d_prints/README.md
 
 ## Summary
 
-This rack was built to be practical, minimal, and tailored to my needs — not just a clone of something from Amazon. Using a mix of aluminum framing, custom-cut panels, and 3D prints, I was able to keep the size down while still allowing for proper rack-mounting and cable management.
+This rack was built to be practical, minimal, and tailored to my needs - not just a clone of something from Amazon. Using a mix of aluminum framing, custom-cut panels, and 3D prints, I was able to keep the size down while still allowing for proper rack-mounting and cable management.
 
 Everything is modular and easy to adapt. Whether I’m swapping hardware, expanding storage, or moving the setup to a new room, the enclosure keeps up without needing a full rebuild.

@@ -1,12 +1,12 @@
 # Plex Media Server
 
-Client–server media system. Runs in `ct-media-b` (VMID 103).
+Client-server media system. Runs in `ct-media-b` (VMID 103).
 
 ## Role
 
 * Organises and streams the film/TV library (on the media NAS, bind-mounted in) to smart
   TVs, phones, tablets, and browsers, on the LAN and remotely.
-* Runs alongside [Jellyfin](jellyfin.md) — Plex for polish and client support, Jellyfin
+* Runs alongside [Jellyfin](jellyfin.md) - Plex for polish and client support, Jellyfin
   as the no-strings fallback.
 
 ## Notes

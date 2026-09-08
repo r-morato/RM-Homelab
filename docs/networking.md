@@ -9,7 +9,7 @@
 
 Each node has a physical NIC on each segment. Keeping storage and cluster traffic off
 the LAN means a busy download or a Plex transcode pulling from the NAS doesn't compete
-with the corosync heartbeat for the same wire — mostly. See the known limitation below.
+with the corosync heartbeat for the same wire - mostly. See the known limitation below.
 
 ```
    Router ── Switch ─┬─ pve-node-1 vmbr0 (10.0.0.11)  ── guests, mgmt
@@ -23,7 +23,7 @@ with the corosync heartbeat for the same wire — mostly. See the known limitati
 
 ## Guest addressing
 
-Guests are on `vmbr0` with static addresses in `10.0.0.100`–`10.0.0.112`, chosen to
+Guests are on `vmbr0` with static addresses in `10.0.0.100`-`10.0.0.112`, chosen to
 match the Proxmox VMID (guest `104` is `10.0.0.104`). It makes the inventory readable
 and means you can guess a guest's address from its ID. The automation container is
 `10.0.0.109`.
@@ -37,11 +37,11 @@ and means you can guess a guest's address from its ID. The automation container 
   either by DHCP option or per-device. See [`software/pihole.md`](../software/pihole.md).
 * The 8-port unmanaged switch ([`hardware/tp_link_tl_sg108s.md`](../hardware/tp_link_tl_sg108s.md))
   is the wired core. Because it's unmanaged there are **no VLANs**: the two segments
-  share one L2 broadcast domain, and the separation is only logical — different subnets,
+  share one L2 broadcast domain, and the separation is only logical - different subnets,
   and each node using a specific NIC for storage/corosync. True isolation (a managed
   switch + VLANs, or a direct node-to-node corosync link) is a roadmap item.
 
-## Corosync — the known weak spot
+## Corosync - the known weak spot
 
 Corosync currently runs a **single ring** on the storage segment. That is a
 simplification worth calling out:
@@ -52,10 +52,10 @@ simplification worth calling out:
   path, and ideally make a dedicated NIC the primary ring.
 
 Until then the QDevice is what keeps a spurious membership blip from turning into a
-loss of quorum — see [high availability](high-availability.md).
+loss of quorum - see [high availability](high-availability.md).
 
 ## Firewall posture
 
-The Proxmox firewall is being rolled out in stages — datacenter default-deny inbound,
-management ports restricted to one subnet, per-guest app-port rules — described in
+The Proxmox firewall is being rolled out in stages - datacenter default-deny inbound,
+management ports restricted to one subnet, per-guest app-port rules - described in
 [security](security.md). Perimeter filtering is handled by the Eero in the meantime.

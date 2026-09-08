@@ -1,7 +1,7 @@
 # High availability & replication
 
 The goal: **if `pve-node-1` dies at 3am, everything is running again on `pve-node-2`
-within a few minutes, with nobody touching a keyboard** — and when `pve-node-1` comes
+within a few minutes, with nobody touching a keyboard** - and when `pve-node-1` comes
 back, the guests move home on their own.
 
 This page covers how that works, why the pieces are arranged the way they are, and the
@@ -9,7 +9,7 @@ manual procedures for planned maintenance.
 
 ## The quorum problem on a 2-node cluster
 
-Proxmox HA will only act while the cluster is **quorate** — more than half of the votes
+Proxmox HA will only act while the cluster is **quorate** - more than half of the votes
 present. A plain 2-node cluster has 2 votes, so losing one node drops you to 1 of 2, the
 survivor's `/etc/pve` goes read-only, and the HA manager refuses to start anything.
 That is the opposite of what you want.
@@ -20,19 +20,18 @@ the setup). With it:
 
 ```
             votes   normal   pve-node-1 down   NAS/QDevice down
-pve-node-1    1        ✓            –                 ✓
+pve-node-1    1        ✓            -                 ✓
 pve-node-2    1        ✓            ✓                 ✓
-QDevice       1        ✓            ✓                 –
-            ─────    ─────       ─────             ─────
+QDevice       1        ✓            ✓                 -             ─────    ─────       ─────             ─────
             total      3          2 of 3            2 of 3   → quorate either way
 ```
 
-Losing any **one** of the three leaves 2 of 3 — still quorate, HA still works. Losing
+Losing any **one** of the three leaves 2 of 3 - still quorate, HA still works. Losing
 two at once is game over, but that is true of any 3-vote cluster.
 
 > The QDevice runs on the storage/cluster segment (`10.0.1.x`). If its address ever
 > changes, `corosync.conf`'s `quorum.device.net.host` has to be updated and
-> `config_version` bumped — pmxcfs then syncs it to both nodes. `pvecm status` should
+> `config_version` bumped - pmxcfs then syncs it to both nodes. `pvecm status` should
 > show `Qdevice` with `1` vote and an `A,V` (Alive, Voting) flag.
 
 See [`hardware/qdevice-host.md`](../hardware/qdevice-host.md).
@@ -70,7 +69,7 @@ alternative are covered in [storage](storage.md).
                               │  pve-node-1 fails
                               ▼
           pve-node-2 fences pve-node-1 (watchdog, ~1 min),
-          then starts all 9 guests from PROX-NFS (~2–5 min total)
+          then starts all 9 guests from PROX-NFS (~2-5 min total)
                               │  pve-node-1 returns
                               ▼
           HA manager migrates the 9 guests back to pve-node-1
@@ -83,24 +82,24 @@ alternative are covered in [storage](storage.md).
 3. After the fence timeout (~1 minute; the dead node self-fences via its hardware
    watchdog) the HA manager declares `pve-node-1`'s guests recoverable.
 4. It starts all 9 on `pve-node-2`, reading their root disks straight from `PROX-NFS`.
-   Total time to "everything back up" is roughly **2–5 minutes**.
+   Total time to "everything back up" is roughly **2-5 minutes**.
 5. When `pve-node-1` reboots and rejoins, fail-back migrates the guests home.
 
 ### Residual caveats (known, accepted)
 
 * **Corosync runs a single ring** on the storage segment. Heavy NFS traffic shares that
   link and could in theory disturb the heartbeat. A second corosync link on the LAN is
-  on the roadmap — see [networking](networking.md).
+  on the roadmap - see [networking](networking.md).
 * **The media containers bind-mount the (currently offline) media NAS.** They will start
   on either node without it; the mount just has to exist on whichever node runs them.
 * **`pve-node-2` has slightly less RAM.** Fine at real-world usage; there is less
   headroom if every guest spikes at once while running on the smaller node.
 * **`pve-node-2`'s local root password is independent** of `pve-node-1`'s. Know it ahead
-  of time — you may need that node's own web UI during an outage of the other.
+  of time - you may need that node's own web UI during an outage of the other.
 
-## Planned maintenance — draining a node by hand
+## Planned maintenance - draining a node by hand
 
-For anything that needs a node down (a reboot, hardware work), don't just pull it — use
+For anything that needs a node down (a reboot, hardware work), don't just pull it - use
 **HA maintenance mode** so the guests migrate off cleanly first:
 
 ```bash

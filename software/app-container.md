@@ -1,6 +1,6 @@
 # App container (`ct-app`)
 
-A small self-hosted **Laravel** web application, running in its own container — VMID 112.
+A small self-hosted **Laravel** web application, running in its own container - VMID 112.
 
 ## Role
 
@@ -9,6 +9,6 @@ A small self-hosted **Laravel** web application, running in its own container �
 
 ## Notes
 
-* **On the nightly backup job** — it holds application data that isn't reproducible.
+* **On the nightly backup job** - it holds application data that isn't reproducible.
 * HA-managed like the rest.
 * Patched by the weekly container job. Config is hand-managed inside the container.

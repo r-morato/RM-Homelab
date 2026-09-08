@@ -8,18 +8,18 @@
 #        -> wait for guests to return (preferred node)
 
 # --- guard: never reboot the node hosting the control node (CT 109) ------------
-- name: "{{ pve_node_name }} — where is the control node (CT {{ control_node_vmid }})?"
+- name: "{{ pve_node_name }} - where is the control node (CT {{ control_node_vmid }})?"
   ansible.builtin.shell:
     cmd: >-
       ha-manager status | sed -n 's/^service ct:{{ control_node_vmid }} (\([^,]*\),.*/\1/p'
   register: _ctl_node
   changed_when: false
 
-- name: "{{ pve_node_name }} — refuse to reboot the node hosting the control node"
+- name: "{{ pve_node_name }} - refuse to reboot the node hosting the control node"
   ansible.builtin.fail:
     msg: >-
       The Ansible control node (CT {{ control_node_vmid }}) is on {{ pve_node_name }},
-      which this run would reboot — that would kill this playbook. Reboot the OTHER
+      which this run would reboot - that would kill this playbook. Reboot the OTHER
       node first (e.g. reboot-hosts.yml --limit <other>), then move CT
       {{ control_node_vmid }} across (ha-manager migrate ct:{{ control_node_vmid }}
       <other>), then re-run this for {{ pve_node_name }} with
@@ -28,12 +28,12 @@
     - (_ctl_node.stdout | trim) == pve_node_name
     - not (control_node_relocated | bool)
 
-- name: "{{ pve_node_name }} — check whether a reboot is required"
+- name: "{{ pve_node_name }} - check whether a reboot is required"
   ansible.builtin.stat:
     path: /var/run/reboot-required
   register: _reboot_file
 
-- name: "{{ pve_node_name }} — compare running kernel with newest installed"
+- name: "{{ pve_node_name }} - compare running kernel with newest installed"
   ansible.builtin.shell:
     cmd: |
       set -e
@@ -43,28 +43,28 @@
   register: _kernel_state
   changed_when: false
 
-- name: "{{ pve_node_name }} — decide whether to reboot"
+- name: "{{ pve_node_name }} - decide whether to reboot"
   ansible.builtin.set_fact:
     _do_reboot: >-
       {{ (not (reboot_only_if_required | bool))
          or _reboot_file.stat.exists
          or (_kernel_state.stdout | trim == 'stale') }}
 
-- name: "{{ pve_node_name }} — skip (no reboot needed)"
+- name: "{{ pve_node_name }} - skip (no reboot needed)"
   ansible.builtin.debug:
     msg: "No reboot required; running kernel is current."
   when: not _do_reboot
 
-- name: "{{ pve_node_name }} — reboot sequence"
+- name: "{{ pve_node_name }} - reboot sequence"
   when: _do_reboot
   block:
 
-    - name: "{{ pve_node_name }} — enter HA maintenance mode"
+    - name: "{{ pve_node_name }} - enter HA maintenance mode"
       ansible.builtin.command:
         cmd: "ha-manager crm-command node-maintenance enable {{ pve_node_name }}"
       changed_when: true
 
-    - name: "{{ pve_node_name }} — wait for HA services to drain"
+    - name: "{{ pve_node_name }} - wait for HA services to drain"
       ansible.builtin.shell:
         cmd: >-
           ha-manager status | grep -c '^service .*({{ pve_node_name }}, ' || true
@@ -74,13 +74,13 @@
       delay: "{{ ha_drain_delay }}"
       until: (_ha_local.stdout | trim | int) == 0
 
-    - name: "{{ pve_node_name }} — reboot and wait for SSH"
+    - name: "{{ pve_node_name }} - reboot and wait for SSH"
       ansible.builtin.reboot:
         reboot_timeout: "{{ node_reboot_timeout }}"
         post_reboot_delay: "{{ node_post_reboot_delay }}"
         test_command: test -e /run/pve-cluster/pve-cluster.sock || systemctl is-active pve-cluster
 
-    - name: "{{ pve_node_name }} — wait for cluster to be quorate"
+    - name: "{{ pve_node_name }} - wait for cluster to be quorate"
       ansible.builtin.command:
         cmd: pvecm status
       register: _pvecm
@@ -89,18 +89,18 @@
       delay: "{{ pvecm_quorum_delay }}"
       until: _pvecm.stdout is search('Quorate:\s+Yes')
 
-    - name: "{{ pve_node_name }} — wait for the web UI / API (pveproxy) to answer"
+    - name: "{{ pve_node_name }} - wait for the web UI / API (pveproxy) to answer"
       ansible.builtin.wait_for:
         port: 8006
         host: 127.0.0.1
         timeout: "{{ pveproxy_wait_timeout }}"
 
-    - name: "{{ pve_node_name }} — leave HA maintenance mode"
+    - name: "{{ pve_node_name }} - leave HA maintenance mode"
       ansible.builtin.command:
         cmd: "ha-manager crm-command node-maintenance disable {{ pve_node_name }}"
       changed_when: true
 
-    - name: "{{ pve_node_name }} — wait for HA services to return (preferred node only)"
+    - name: "{{ pve_node_name }} - wait for HA services to return (preferred node only)"
       ansible.builtin.shell:
         cmd: >-
           ha-manager status | grep -c '^service .*({{ pve_node_name }}, ' || true

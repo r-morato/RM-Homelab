@@ -1,7 +1,7 @@
 # Architecture
 
 This is the "how it all fits together" page. Individual subsystems get their own deep
-dives — [high availability](high-availability.md), [storage](storage.md),
+dives - [high availability](high-availability.md), [storage](storage.md),
 [networking](networking.md), [backups](backups.md), [automation](automation.md),
 [patching](patching.md), [provisioning](provisioning.md), [security](security.md).
 
@@ -42,7 +42,7 @@ maintenance boring** (scheduled, reversible, self-announcing).
 | | `pve-node-1` | `pve-node-2` |
 |---|---|---|
 | Hardware | Lenovo ThinkCentre M720q Tiny | HP EliteDesk 800 (Mini), slightly less RAM |
-| Role | primary — HA node-affinity prefers it | failover target |
+| Role | primary - HA node-affinity prefers it | failover target |
 | OS | Proxmox VE 9.2 on Debian 13 | same |
 | Local disk | single NVMe SSD, LVM-thin pool (`local-lvm`) | same |
 
@@ -64,18 +64,18 @@ covered here.
 | 101 | `ct-torrent` | download client ([media stack](../software/media-stack.md)) | yes | no |
 | 102 | `ct-media-a` | [Jellyfin](../software/jellyfin.md) (iGPU transcode) | yes | no |
 | 103 | `ct-media-b` | [Plex](../software/plex.md) (iGPU transcode) | yes | no |
-| 104 | `ct-docker` | [Docker host](../software/docker-host.md) — Portainer, Uptime-Kuma | yes | yes |
+| 104 | `ct-docker` | [Docker host](../software/docker-host.md) - Portainer, Uptime-Kuma | yes | yes |
 | 105 | `ct-gateway` | [Apache Guacamole](../software/guacamole.md) remote-access gateway | yes | yes |
-| 106–108 | `ct-indexer-a/b/c` | media indexer / automation ([media stack](../software/media-stack.md)) | yes | no |
+| 106-108 | `ct-indexer-a/b/c` | media indexer / automation ([media stack](../software/media-stack.md)) | yes | no |
 | 109 | `ct-ansible` | [Ansible + Semaphore](../software/ansible.md) control container | yes | yes |
 | 112 | `ct-app` | [small Laravel app](../software/app-container.md) | yes | yes |
 
 "Backed up" = on the nightly `vzdump` job. The media-acquisition and streaming
-containers are deliberately excluded — they hold no unique state worth an archive
+containers are deliberately excluded - they hold no unique state worth an archive
 (everything is re-downloadable or lives on the media NAS), and they are the largest and
 noisiest to back up. See [backups](backups.md) for the reasoning.
 
-Two containers — `ct-media-a` and `ct-media-b` — share the host's integrated GPU for
+Two containers - `ct-media-a` and `ct-media-b` - share the host's integrated GPU for
 hardware transcoding.
 
 ## Storage layout
@@ -87,7 +87,7 @@ hardware transcoding.
 | media NAS | second NAS (SMB/NFS), currently offline | bulk media, bind-mounted into the media containers |
 
 Putting the guest root disks on NFS is what makes HA failover possible on a 2-node
-cluster with no shared block storage — either node can start any guest because the disk
+cluster with no shared block storage - either node can start any guest because the disk
 image is reachable from both. The cost is that the NAS is a broad single point of
 failure. Both sides of that trade-off are discussed in [storage](storage.md).
 
@@ -100,14 +100,14 @@ failure. Both sides of that trade-off are discussed in [storage](storage.md).
 4. `unattended-upgrades` and the Semaphore schedules take over routine patching from
    there; the `vzdump` timer fires nightly at 02:30.
 
-If `pve-node-1` never comes back, step 3 happens on `pve-node-2` instead — see
+If `pve-node-1` never comes back, step 3 happens on `pve-node-2` instead - see
 [high availability](high-availability.md).
 
 ## Standalone appliances (not in the cluster)
 
-* **Raspberry Pi 4** — runs Home Assistant OS on bare metal. Deliberately independent of
+* **Raspberry Pi 4** - runs Home Assistant OS on bare metal. Deliberately independent of
   the cluster so home automation keeps working during cluster maintenance. See
   [`software/homeassistant.md`](../software/homeassistant.md).
-* **ESP32 + e-ink display** — pulls Proxmox stats over the API and shows them on a
+* **ESP32 + e-ink display** - pulls Proxmox stats over the API and shows them on a
   low-power screen on the rack. See
   [`hardware/esp32_eink_dashboard.md`](../hardware/esp32_eink_dashboard.md).

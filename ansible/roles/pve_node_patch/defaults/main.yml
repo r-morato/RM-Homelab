@@ -1,2 +1,2 @@
 ---
-# (kept minimal — this role no longer drains HA; see reboot-hosts.yml for that)
+# (kept minimal - this role no longer drains HA; see reboot-hosts.yml for that)

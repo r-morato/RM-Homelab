@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# Create the Ansible control node — CT 109 — on the Proxmox host.
+# Create the Ansible control node - CT 109 - on the Proxmox host.
 # Run as root ON a cluster node (pve-node-1). Review every value first.
 #
 # Idempotent-ish: it refuses to run if CT 109 already exists.
@@ -22,7 +22,7 @@ TEMPLATE_NAME="debian-13-standard_13.6-1_amd64.tar.zst"   # from `pveam availabl
 UNPRIVILEGED=1
 
 if pct status "$CTID" &>/dev/null; then
-  echo "CT $CTID already exists — aborting." >&2
+  echo "CT $CTID already exists - aborting." >&2
   exit 1
 fi
 
@@ -45,7 +45,7 @@ pct create "$CTID" "${TEMPLATE_STORE}:vztmpl/${TEMPLATE_NAME}" \
   --onboot 1 \
   --unprivileged "$UNPRIVILEGED" \
   --features nesting=0,keyctl=0 \
-  --description "Ansible / Semaphore control node. Holds root SSH keys to the whole cluster — keep locked down. Managed: this repo (ansible/)."
+  --description "Ansible / Semaphore control node. Holds root SSH keys to the whole cluster - keep locked down. Managed: this repo (ansible/)."
 
 echo "==> Starting CT $CTID"
 pct start "$CTID"

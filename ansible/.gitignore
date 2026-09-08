@@ -1,4 +1,4 @@
-# Real inventory and secrets — never commit. Ship hosts.example.yml only.
+# Real inventory and secrets - never commit. Ship hosts.example.yml only.
 inventory/hosts.yml
 inventory/*.local.yml
 **/vault.yml

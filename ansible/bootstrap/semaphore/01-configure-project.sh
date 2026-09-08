@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Configure the Semaphore "Homelab" project via the API. Idempotent-ish:
-# it errors if objects already exist — safe to read the errors and move on.
+# it errors if objects already exist - safe to read the errors and move on.
 set -euo pipefail
 BASE="http://127.0.0.1:3000/api"
 CJ=/tmp/sem.cookies

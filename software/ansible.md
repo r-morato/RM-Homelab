@@ -1,10 +1,10 @@
 # Ansible control container (`ct-ansible`)
 
-The container that runs all fleet-wide automation — VMID 109, label `ct-ansible`.
+The container that runs all fleet-wide automation - VMID 109, label `ct-ansible`.
 
 ## What's on it
 
-* `ansible-core` (from the Debian `ansible` package — so `community.general` and
+* `ansible-core` (from the Debian `ansible` package - so `community.general` and
   `ansible.posix` come pinned with it, no Galaxy pulls)
 * the playbook repo at `/opt/ansible` (this repo's [`ansible/`](../ansible/) directory)
 * [Semaphore](semaphore.md) for the web UI and schedules
@@ -17,7 +17,7 @@ The container that runs all fleet-wide automation — VMID 109, label `ct-ansibl
 | Unprivileged LXC, `nesting=0,keyctl=0` | minimal attack surface |
 | Root disk on **`local-lvm`**, not NFS | still runs (and can still patch/rebuild the fleet) during a storage outage |
 | HA-managed + on the nightly backup job | it's now critical infrastructure |
-| Passphrase-less SSH key, root on every target | it has to run unattended — but every `authorized_keys` entry is `from="<control IP>"`-locked |
+| Passphrase-less SSH key, root on every target | it has to run unattended - but every `authorized_keys` entry is `from="<control IP>"`-locked |
 | Reachable on the LAN segment only | management traffic stays off the storage/cluster network |
 
 It is the **single most sensitive guest in the lab**: whoever holds it holds root

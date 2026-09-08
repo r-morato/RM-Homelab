@@ -1,4 +1,4 @@
-# Control container — build & harden
+# Control container - build & harden
 
 The container that runs Ansible and Semaphore. It holds root SSH access to every node
 and guest, so it is treated as the most sensitive box in the lab.
@@ -9,12 +9,12 @@ Run [`bootstrap/01-create-control-node.sh`](../bootstrap/01-create-control-node.
 `pve-node-1` as root. It:
 
 * downloads the Debian 13 template if missing;
-* creates the container — **unprivileged**, 1 vCPU / 512 MB / 512 MB swap / 4 GB on
+* creates the container - **unprivileged**, 1 vCPU / 512 MB / 512 MB swap / 4 GB on
   `local-lvm` (deliberately **not** NFS, so it survives a storage outage), `net0` on the
   LAN bridge, `firewall=1`, `onboot=1`, `nesting=0,keyctl=0`;
 * `apt dist-upgrade`s it and installs `ansible`, `git`, `openssh-client`, `jq`,
   `unattended-upgrades`;
-* generates `/root/.ssh/id_ed25519_ansible` (no passphrase — it has to run unattended)
+* generates `/root/.ssh/id_ed25519_ansible` (no passphrase - it has to run unattended)
   and an `~/.ssh/config` that always uses it;
 * prints the public key.
 
@@ -44,7 +44,7 @@ It backs up the node's `authorized_keys` file first.
 ### 3a. Containers with `AllowUsers`
 
 Some guests ship an `AllowUsers ssh-user` line in `sshd_config`, which blocks root SSH
-**before** the key is checked — `ping.yml` reports them `unreachable` with
+**before** the key is checked - `ping.yml` reports them `unreachable` with
 `User root ... not allowed because not listed in AllowUsers`.
 
 Fix: a drop-in on each affected container (back up the original `sshd_config` first):
@@ -78,7 +78,7 @@ ansible-playbook playbooks/ping.yml                    # all hosts must answer
 ```
 
 If `ping.yml` fails for a container, its `/root/.ssh/authorized_keys` or the `from=`
-address is wrong — re-check step 3.
+address is wrong - re-check step 3.
 
 ## 6. Harden the container's own SSH
 
@@ -109,7 +109,7 @@ pct exec 109 -- bash -c '
 ## 8. Logging
 
 Run logs live in **Semaphore's task history** (full per-run stdout, kept indefinitely).
-`ansible.cfg` deliberately sets **no `log_path`** — a root-owned logfile is not writable
+`ansible.cfg` deliberately sets **no `log_path`** - a root-owned logfile is not writable
 by the `semaphore` service user and just produces warnings.
 
 ## 9. Scheduling without Semaphore (fallback)

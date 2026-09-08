@@ -30,7 +30,7 @@
 
 - name: Show repo warnings (non-fatal)
   ansible.builtin.debug:
-    msg: "{{ inventory_hostname }}: apt repo problems — {{ apt_repo_warnings }}"
+    msg: "{{ inventory_hostname }}: apt repo problems - {{ apt_repo_warnings }}"
   when: apt_repo_warnings | length > 0
 
 - name: Simulate the upgrade (for the summary, no changes)

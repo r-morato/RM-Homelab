@@ -11,8 +11,8 @@ two schedules, one manual job.
 
 | Job | Playbook | When | Reboots? |
 |---|---|---|---|
-| Patch containers | `patch-guests.yml` | weekly — **Sat 02:00** (`0 2 * * 6`) | no (opt-in) |
-| Patch hypervisors | `patch-hosts.yml` | monthly — **1st Sun 03:00** (`0 3 1-7 * 0`) | **never** |
+| Patch containers | `patch-guests.yml` | weekly - **Sat 02:00** (`0 2 * * 6`) | no (opt-in) |
+| Patch hypervisors | `patch-hosts.yml` | monthly - **1st Sun 03:00** (`0 3 1-7 * 0`) | **never** |
 | Reboot hypervisors | `reboot-hosts.yml` | **manual only** | yes, one node at a time |
 | Connectivity check | `ping.yml` | on demand | no |
 
@@ -30,10 +30,10 @@ Weekly. In order:
    `force-confdef,force-confold` so it never blocks on a config prompt) →
    `needrestart -b` to restart services touched by a library bump.
 3. **Notify.** A compact per-guest summary to the phone:
-   `LXC patch — 3 updated, 1 reboot-pending` and a line per container.
+   `LXC patch - 3 updated, 1 reboot-pending` and a line per container.
 
 Container "reboots" are almost always just a service needing a bounce after a
-glibc/openssl update — `needrestart` handles that live. A true `pct reboot` is a
+glibc/openssl update - `needrestart` handles that live. A true `pct reboot` is a
 seconds-long operation and is **opt-in**: `-e allow_reboot=true`.
 
 ### A dead third-party repo doesn't stop the run
@@ -42,7 +42,7 @@ seconds-long operation and is **opt-in**: `-e allow_reboot=true`.
 `apt_upgrade` role treats `100` as non-fatal, patches everything the working repos
 provide, and flags `[repo warnings]` in the summary with the failing lines. Any other
 failure (network down, dpkg lock) is still fatal. This came from a container whose
-database vendor deleted a short-term-release repo out from under it — the fix was that
+database vendor deleted a short-term-release repo out from under it - the fix was that
 tolerance plus moving that container onto the vendor's LTS repo.
 
 ## Patching the hypervisors (`patch-hosts.yml`)
@@ -51,7 +51,7 @@ Monthly, `serial: 1` (one node at a time), `any_errors_fatal`. Per node it does
 **exactly one thing: `apt dist-upgrade` in place.**
 
 * **No reboot.** If the upgrade pulls a new kernel or sets `/var/run/reboot-required`,
-  the run *reports* it — `PVE host patch — 1 node(s) need a reboot` — and stops there.
+  the run *reports* it - `PVE host patch - 1 node(s) need a reboot` - and stops there.
 * **No HA drain.** Installing packages on a running node doesn't disturb its guests, and
   draining every guest to the other node and back just to run `apt` is both disruptive
   and self-defeating: the control container is itself an HA guest, so "evacuate this
@@ -65,7 +65,7 @@ Run by hand, watching it, after `patch-hosts.yml` flags a reboot. `serial: 1`,
 `any_errors_fatal`. Per node:
 
 1. **Guard.** Find which node hosts the control container (`ha-manager status`). If it's
-   *this* node, **fail immediately** with instructions — rebooting it would kill the
+   *this* node, **fail immediately** with instructions - rebooting it would kill the
    run. Override only with `-e control_node_relocated=true` after moving it yourself.
 2. **Decide.** Reboot only if `/var/run/reboot-required` exists or the running kernel is
    older than the newest installed one (`-e reboot_only_if_required=false` to force).
@@ -87,15 +87,15 @@ ansible-playbook playbooks/reboot-hosts.yml --limit <first> -e control_node_relo
 ```
 
 This is the by-hand kernel-upgrade procedure from a real maintenance window, turned into
-code — including the part where you must not strand yourself.
+code - including the part where you must not strand yourself.
 
 ## What a normal month looks like
 
-* **Every Saturday 02:00** — containers patched, phone push: "N updated, 0
+* **Every Saturday 02:00** - containers patched, phone push: "N updated, 0
   reboot-pending". Nothing to do.
-* **1st Sunday 03:00** — both nodes patched in place. Phone push either "0 nodes need a
+* **1st Sunday 03:00** - both nodes patched in place. Phone push either "0 nodes need a
   reboot" (done) or "1 node needs a reboot".
-* **If a reboot was flagged** — pick a evening, run `reboot-hosts.yml` against each node
+* **If a reboot was flagged** - pick a evening, run `reboot-hosts.yml` against each node
   in turn, watch the phone for the "rolling reboot complete" push. ~10 minutes,
   guests never all down at once.
 

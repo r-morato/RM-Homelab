@@ -1,6 +1,6 @@
 # Apache Guacamole (remote-access gateway)
 
-Clientless remote desktop gateway — RDP / VNC / SSH in a browser tab, no client install.
+Clientless remote desktop gateway - RDP / VNC / SSH in a browser tab, no client install.
 Runs in `ct-gateway` (VMID 105).
 
 ## Role
@@ -25,6 +25,6 @@ handled as one of the more important guests to keep locked down and current:
 
 * MariaDB root auth inside the container is `unix_socket` (no password).
 * The database was moved from a short-term-support release onto the **LTS** line to stop
-  the annual repo-churn that once broke a patch run — see [patching](../docs/patching.md).
+  the annual repo-churn that once broke a patch run - see [patching](../docs/patching.md).
 * HA-managed. The SSH connection needs username `root` (lowercase) and the guacd
   host/port fields left blank.

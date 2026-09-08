@@ -2,7 +2,7 @@
 
 <img width="583" alt="The rack" src="https://github.com/user-attachments/assets/839070fc-07c0-4ad8-93b7-052136dc8fb8" />
 
-A compact, quiet, movable homelab in a custom 10-inch rack — two cables to run it
+A compact, quiet, movable homelab in a custom 10-inch rack - two cables to run it
 (power and Ethernet), enough capability to host the services I use every day, and
 built so a single hardware failure or a bad upgrade doesn't take anything down for long.
 
@@ -17,35 +17,35 @@ so I can rebuild from it.
 
 ## Why build it
 
-I wanted one place to learn, experiment, and self-host — with real control over my data
+I wanted one place to learn, experiment, and self-host - with real control over my data
 and no monthly bill for things I can run myself. The constraints that shaped every
 decision: **low noise** (it lives near people), **low power**, **physically mobile**
-(hence wheels), and **cheap** — no enterprise hardware. Not the most powerful lab; the
+(hence wheels), and **cheap** - no enterprise hardware. Not the most powerful lab; the
 sweet spot between capability, cost, and cleanliness.
 
 ## What it is now
 
 - **2-node Proxmox VE cluster** (a Lenovo ThinkCentre M720q and an HP EliteDesk 800
   mini-PC) with an external **QDevice** on the NAS for quorum.
-- **High availability across every running guest** — lose a node and everything restarts
+- **High availability across every running guest** - lose a node and everything restarts
   on the other in a few minutes, then moves home when the node returns.
-- **Shared storage over NFS from the NAS** — guest disks live there so either node can
+- **Shared storage over NFS from the NAS** - guest disks live there so either node can
   run any guest.
-- **Nightly backups to the NAS** — `vzdump` for the stateful containers, a daily
+- **Nightly backups to the NAS** - `vzdump` for the stateful containers, a daily
   host-config archive, and a database-consistent dump for the one guest that needs it.
   Restores are tested.
-- **Scheduled, hands-off patching** — a dedicated Ansible container with a
+- **Scheduled, hands-off patching** - a dedicated Ansible container with a
   [Semaphore](https://github.com/semaphoreui/semaphore) web UI patches the containers
   weekly and the hypervisors monthly, and pushes a summary to my phone. Reboots stay
   manual.
-- **Hardened baseline** — key-only SSH with `fail2ban`, the Docker API on a local socket
+- **Hardened baseline** - key-only SSH with `fail2ban`, the Docker API on a local socket
   only, secrets kept out of git, and a staged firewall rollout.
 
 ## Documentation
 
 | | |
 |---|---|
-| [Architecture](docs/architecture.md) | how it all fits together — nodes, guests, storage, boot order |
+| [Architecture](docs/architecture.md) | how it all fits together - nodes, guests, storage, boot order |
 | [High availability & replication](docs/high-availability.md) | quorum on 2 nodes, HA failover, planned-maintenance drains |
 | [Storage](docs/storage.md) | the NFS / local-lvm / media-NAS tiers and the trade-offs |
 | [Networking](docs/networking.md) | the two segments, addressing, DNS, the corosync caveat |
@@ -81,12 +81,12 @@ Full notes in [`hardware/`](hardware/) and [`rack-build.md`](rack-build.md).
 
 - **Noise matters more than you think** when servers live near bedrooms.
 - **Cheap gear goes surprisingly far** if you're willing to tinker.
-- **Power and thermals aren't optional** — the SSDs show a high unclean-shutdown count,
+- **Power and thermals aren't optional** - the SSDs show a high unclean-shutdown count,
   which is why a UPS with automatic graceful shutdown is near the top of the list.
 - **A 2-node cluster needs a third vote.** Without the QDevice, losing either node
   freezes the survivor. With it, failover is a non-event.
 - **`curl | bash` from someone else's `main` branch, as root, on a schedule** is a bad
-  idea however convenient — replacing it with version-controlled Ansible was worth it.
+  idea however convenient - replacing it with version-controlled Ansible was worth it.
 - **Snapshots and tested restores turn mistakes into footnotes.**
 
 ## Roadmap

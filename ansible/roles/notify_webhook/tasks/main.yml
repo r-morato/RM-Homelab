@@ -23,7 +23,7 @@
 
 - name: Note if the notification did not go through
   ansible.builtin.debug:
-    msg: "Webhook notification failed (status {{ _notify.status | default('n/a') }}) — continuing."
+    msg: "Webhook notification failed (status {{ _notify.status | default('n/a') }}) - continuing."
   when:
     - notify_webhook_enabled | bool
     - _notify.status is not defined or _notify.status not in [200, 201, 202, 204]

@@ -8,7 +8,7 @@ external [QDevice](../hardware/qdevice-host.md) on the NAS for quorum.
 
 * **10 unprivileged LXC containers** for the services (dashboard, media, Docker host,
   remote-access gateway, download + indexer stack, the automation container, a small
-  app) — full list in [architecture](../docs/architecture.md).
+  app) - full list in [architecture](../docs/architecture.md).
 * One small utility VM.
 
 Containers are preferred over VMs: lighter, second-long boots, and they share the host's
@@ -34,6 +34,6 @@ monthly (in place, no reboot), rolling reboots by hand.
 
 ## Standalone tooling around it
 
-* **Semaphore** — [Ansible web UI](semaphore.md), runs in `ct-ansible`.
-* **ESP32 e-ink display** — read-only consumer of the PVE API, shows cluster stats on
+* **Semaphore** - [Ansible web UI](semaphore.md), runs in `ct-ansible`.
+* **ESP32 e-ink display** - read-only consumer of the PVE API, shows cluster stats on
   the rack ([`hardware/esp32_eink_dashboard.md`](../hardware/esp32_eink_dashboard.md)).

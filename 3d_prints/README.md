@@ -12,9 +12,9 @@ All models are either downloaded from trusted sources or custom-designed to fit 
 |-----------------------------------|-------------------------------------------------------------------------------|
 | **Raspberry Pi 3B / 4B / 5B Rack Mount** | [Printables.com](https://www.printables.com/model/1185545-raspberry-pi-3b4b5b-10-inch-rack-mount/files) |
 | **TP-Link TL-SG108 Switch Mount** | [Printables.com](https://www.printables.com/model/967188-sturdy-10-inch-rack-mount-for-the-tl-sg108-consume/files) |
-| **5.25" Drive Adapter Mount**     | [Thingiverse](https://www.thingiverse.com/thing:6859441) <!-- Add actual link if available --> |
+| **5.25" Drive Adapter Mount**     | [Thingiverse](https://www.thingiverse.com/thing:6859441) |
 | **ThinkCentre M720q / M920q Mount** | [Printables](https://www.printables.com/model/1040412-lenovo-thinkcentre-tiny-m720qm715qm920q-10-rack-mo) |
-| **eInk Display Mount**            | Custom-designed for this rack — not publicly uploaded yet, but may be shared later. |
+| **eInk Display Mount**            | Custom-designed for this rack - not publicly uploaded yet, but may be shared later. |
 
 ---
 

@@ -11,7 +11,7 @@ Web UI for managing Docker. Runs as a container on the [Docker host](docker-host
 
 ## Notes
 
-* Talks to Docker over the **local socket**, not a TCP port — unaffected by the daemon
+* Talks to Docker over the **local socket**, not a TCP port - unaffected by the daemon
   lockdown described in [`docker-host.md`](docker-host.md).
 * Its stack definitions are part of why `ct-docker` is on the backup job.
 * Web UI access is scoped to the management subnet as part of the

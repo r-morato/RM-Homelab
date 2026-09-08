@@ -1,6 +1,6 @@
 # Automation (Ansible + Semaphore)
 
-All fleet-wide changes — OS patching today, more over time — run from **one dedicated
+All fleet-wide changes - OS patching today, more over time - run from **one dedicated
 container** through **Ansible**, with **Semaphore** providing a web UI, schedules, and
 run history. The playbooks and roles are version-controlled in
 [`../ansible/`](../ansible/); that directory has its own
@@ -15,7 +15,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/<third-party>/main/.../u
 ```
 
 That fetches whatever is at a third-party repo's `main` branch *at that moment* and runs
-it as root on the hypervisor — no version pin, no checksum, no local copy, all output
+it as root on the hypervisor - no version pin, no checksum, no local copy, all output
 discarded. Anyone who could land a commit in that repo (or intercept the fetch) would
 get root on the cluster within a week. It also ran `apt dist-upgrade` in every container
 with no pre-backup and no report.
@@ -26,14 +26,14 @@ notification, and a full run log.**
 
 ## The control container
 
-`ct-ansible` (VMID 109) — see [`software/ansible.md`](../software/ansible.md):
+`ct-ansible` (VMID 109) - see [`software/ansible.md`](../software/ansible.md):
 
 * **Unprivileged, minimal** Debian 13 LXC, 1 vCPU / 512 MB, `nesting=0,keyctl=0`,
   per-guest firewall on.
-* **On `local-lvm`, not NFS** — so it still runs, and can still patch and rebuild the
+* **On `local-lvm`, not NFS** - so it still runs, and can still patch and rebuild the
   fleet, during a storage outage.
-* **HA-managed** and on the nightly backup job — it is now important infrastructure.
-* Holds a dedicated SSH keypair (`id_ed25519_ansible`, no passphrase — it runs
+* **HA-managed** and on the nightly backup job - it is now important infrastructure.
+* Holds a dedicated SSH keypair (`id_ed25519_ansible`, no passphrase - it runs
   unattended) that is authorised as **root** on every guest and on the peer node.
 * It is the **single most sensitive guest in the lab**: whoever holds it holds root
   everywhere. Hardening reflects that (see [security](security.md)).
@@ -63,8 +63,8 @@ notification, and a full run log.**
 ansible/
 ├── ansible.cfg              # inventory path, ssh tuning, yaml stdout
 ├── inventory/
-│   ├── hosts.example.yml    # committed — placeholder addresses, the group structure
-│   └── hosts.yml            # gitignored — real addresses + webhook URL
+│   ├── hosts.example.yml    # committed - placeholder addresses, the group structure
+│   └── hosts.yml            # gitignored - real addresses + webhook URL
 ├── roles/
 │   ├── apt_upgrade/         # idempotent update+upgrade; tolerates a dead 3rd-party repo
 │   ├── pve_node_patch/      # dist-upgrade a node in place; flag if a reboot is due
@@ -87,23 +87,23 @@ ansible/
   the run comes from the CLI or from Semaphore.
 * **No root `requirements.yml`.** `community.general` and `ansible.posix` come from the
   Debian `ansible` package. A root `requirements.yml` would make Semaphore pull newer
-  major versions from Galaxy every run — and `community.general` ≥ 12 removed the `yaml`
+  major versions from Galaxy every run - and `community.general` ≥ 12 removed the `yaml`
   stdout callback, which would break the output format. The pinned reference list is
   kept at `ansible/docs/requirements.reference.yml` for a non-Debian control box.
 
 ## Semaphore
 
-[Semaphore CE](https://github.com/semaphoreui/semaphore) — a single Go binary — runs in
+[Semaphore CE](https://github.com/semaphoreui/semaphore) - a single Go binary - runs in
 the same container and gives Ansible:
 
 * **task templates** (one per playbook), run with one click or on a schedule;
 * **cron schedules** (see [patching](patching.md) for the specific times);
-* **run history** with full per-run stdout, kept indefinitely — this is the run log,
+* **run history** with full per-run stdout, kept indefinitely - this is the run log,
   `ansible.cfg` deliberately sets no `log_path`;
 * **failure alerts** for the case where a playbook errors *before* its own notify step.
 
 It uses a SQLite backend (2.19 dropped BoltDB) and a static YAML inventory pasted into
-the UI (encrypted at rest with `access_key_encryption` — so the config file and the DB
+the UI (encrypted at rest with `access_key_encryption` - so the config file and the DB
 must be backed up together, which the nightly job does). Full build steps:
 [`ansible/docs/semaphore.md`](../ansible/docs/semaphore.md).
 
@@ -112,7 +112,7 @@ must be backed up together, which the nightly job does). Full build steps:
 `patch-guests.yml`, end to end:
 
 1. **Play 1** (once, on `pve-node-1`): `vzdump` the `backup_protected` containers in
-   snapshot mode — a bad upgrade is one `pct rollback` away. Skippable with
+   snapshot mode - a bad upgrade is one `pct rollback` away. Skippable with
    `-e pre_patch_backup=false`.
 2. **Play 2** (all guests, `serial: 50%`): `apt-get update` (tolerating a dead
    third-party repo), simulate the upgrade to count packages, `apt dist-upgrade` with
@@ -130,10 +130,9 @@ guests changed and which want a reboot.
    the backup job).
 2. Paste the updated inventory into Semaphore's static inventory too (the price of
    keeping `hosts.yml` out of git).
-3. Authorise the control key on it —
-   `bootstrap/02-deploy-control-node-key.sh` (add the ID to `GUEST_IDS`), plus the
+3. Authorise the control key on it -    `bootstrap/02-deploy-control-node-key.sh` (add the ID to `GUEST_IDS`), plus the
    `20-ansible.conf` sshd drop-in if the guest uses `AllowUsers`.
 4. `ha-manager add ct:<id> --state started` and add it to the node-affinity rule.
 
 A `community.general.proxmox` **dynamic inventory** (auto-discovers guests from the PVE
-API, group membership from tags) would remove steps 1–2; it's a roadmap item.
+API, group membership from tags) would remove steps 1-2; it's a roadmap item.

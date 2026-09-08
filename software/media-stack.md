@@ -22,6 +22,6 @@ self-hosted media-automation pattern.
   on the media NAS. They're also the largest and slowest containers to archive.
 * All HA-managed.
 * The download client's web UI requires a login from every address, and its credentials
-  live in a password manager, not in the guest Notes — see
+  live in a password manager, not in the guest Notes - see
   [security](../docs/security.md).
 * Config is hand-managed inside each container.

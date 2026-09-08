@@ -1,6 +1,6 @@
 ---
 # ---------------------------------------------------------------------------
-# EXAMPLE inventory — safe to commit. Copy to hosts.yml and fill in real
+# EXAMPLE inventory - safe to commit. Copy to hosts.yml and fill in real
 # addresses. hosts.yml is gitignored and never leaves the host.
 #
 # Placeholder scheme (same as the rest of the repo):

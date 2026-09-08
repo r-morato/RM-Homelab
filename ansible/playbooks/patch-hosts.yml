@@ -1,5 +1,5 @@
 ---
-# Patch the Proxmox VE nodes — package updates only, NEVER a reboot, NO HA drain.
+# Patch the Proxmox VE nodes - package updates only, NEVER a reboot, NO HA drain.
 # One node at a time.
 #
 #   ansible-playbook playbooks/patch-hosts.yml
@@ -37,7 +37,7 @@
         name: notify_webhook
       vars:
         notify_title: >-
-          PVE host patch — {{ _reboot_nodes }} node(s) need a reboot
+          PVE host patch - {{ _reboot_nodes }} node(s) need a reboot
         notify_message: |-
           {{ _summary }}
           {% if (_reboot_nodes | int) > 0 %}

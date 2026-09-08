@@ -69,5 +69,5 @@
       ansible.builtin.include_role:
         name: notify_webhook
       vars:
-        notify_title: "LXC patch — {{ _changed_hosts }} updated, {{ _pending_hosts }} reboot-pending"
+        notify_title: "LXC patch - {{ _changed_hosts }} updated, {{ _pending_hosts }} reboot-pending"
         notify_message: "{{ _summary }}"

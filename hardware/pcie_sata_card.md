@@ -10,6 +10,6 @@ Connects the [Oimaster HE-2006](oimaster_he2006.md) hot-swap cage to the node so
 
 ## Notes
 
-Cards like this are usually a JMicron/ASMedia HBA — fine for SSDs in AHCI mode. It is
+Cards like this are usually a JMicron/ASMedia HBA - fine for SSDs in AHCI mode. It is
 not used for the cluster's primary storage (that's NVMe boot + NFS guest disks); it's
 there for expansion headroom.

@@ -3,7 +3,7 @@
 How the 2-node cluster stays quorate and how guests fail over. See
 [`docs/high-availability.md`](../docs/high-availability.md).
 
-## Quorum — 3 votes across 3 boxes
+## Quorum - 3 votes across 3 boxes
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart TB
 
     subgraph "pve-node-1 fails"
         B1["pve-node-1<br>DOWN (self-fenced via watchdog, ~1 min)"]
-        B2["pve-node-2<br>quorate with QDevice → starts all 9<br>from PROX-NFS (~2–5 min)"]
+        B2["pve-node-2<br>quorate with QDevice → starts all 9<br>from PROX-NFS (~2-5 min)"]
         NFS2[("PROX-NFS")]
         B2 --- NFS2
     end
@@ -48,5 +48,5 @@ flowchart TB
 ```
 
 Failover works because there is only ever **one copy** of each guest disk, on NFS, and
-both nodes mount it — no replication, no sync lag. The cost is that the NAS is a shared
+both nodes mount it - no replication, no sync lag. The cost is that the NAS is a shared
 single point of failure; see [`docs/storage.md`](../docs/storage.md).

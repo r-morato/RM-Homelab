@@ -5,7 +5,7 @@
 # almost always just a service that needs restarting after a library bump
 # (glibc/openssl). needrestart handles that live. A true `pct reboot`
 # is a fast (seconds) operation and is safe to allow on scheduled runs, but
-# it is OFF by default — enable per run with:  -e allow_reboot=true
+# it is OFF by default - enable per run with:  -e allow_reboot=true
 allow_reboot: false
 
 apt_upgrade_type: dist

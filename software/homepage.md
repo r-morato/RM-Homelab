@@ -1,6 +1,6 @@
 # Homepage (dashboard)
 
-[Homepage](https://gethomepage.dev/) — the lab's start page. Runs in `ct-dashboard`
+[Homepage](https://gethomepage.dev/) - the lab's start page. Runs in `ct-dashboard`
 (VMID 100).
 
 ## Role
@@ -15,6 +15,6 @@
 * Config is hand-written YAML inside the container (`services.yaml`, `widgets.yaml`,
   `bookmarks.yaml`). Fiddly to recreate, so `ct-dashboard` **is on the nightly backup
   job**.
-* It only links to service web UIs — it stores no credentials of its own. API keys for
+* It only links to service web UIs - it stores no credentials of its own. API keys for
   the widgets live in its environment / config, referenced from the guest's Notes.
 * HA-managed like the rest.
