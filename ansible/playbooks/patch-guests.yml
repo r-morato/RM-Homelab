@@ -1,0 +1,73 @@
+---
+# Patch every LXC guest. Safe to run on a schedule.
+#
+#   ansible-playbook playbooks/patch-guests.yml
+#   ansible-playbook playbooks/patch-guests.yml --check         # dry run
+#   ansible-playbook playbooks/patch-guests.yml -e allow_reboot=true
+#   ansible-playbook playbooks/patch-guests.yml -e pre_patch_backup=false
+#
+# 1. snapshot-backup the protected containers from a PVE node
+# 2. apt dist-upgrade every guest, guest_patch_serial at a time, needrestart after
+# 3. POST a short summary to the notification webhook
+
+- name: Pre-patch backup of protected containers
+  hosts: "{{ groups['pve_nodes'] | first }}"
+  gather_facts: false
+  run_once: true
+  tasks:
+    - name: "vzdump {{ _protected_ids }} (snapshot, zstd)"
+      vars:
+        _protected_ids: "{{ groups['backup_protected'] | map('extract', hostvars, 'pve_vmid') | map('string') | join(',') }}"
+      ansible.builtin.command:
+        argv:
+          - vzdump
+          - "{{ _protected_ids }}"
+          - "--mode=snapshot"
+          - "--compress=zstd"
+          - "--storage={{ pre_patch_backup_storage }}"
+          - "--notes-template=pre-patch {% raw %}{{guestname}}{% endraw %}"
+          - "--mailnotification=failure"
+      register: _vzdump
+      changed_when: true
+      when: pre_patch_backup | bool
+
+- name: Patch LXC guests
+  hosts: lxc_guests
+  gather_facts: true
+  serial: "{{ guest_patch_serial | default('50%') }}"
+  max_fail_percentage: 30
+  # apt_upgrade_type / allow_reboot / needrestart_manage / apt_autoremove all
+  # come from inventory/group_vars/lxc_guests.yml (override per run with -e).
+  roles:
+    - role: apt_upgrade
+
+  post_tasks:
+    - name: "pct reboot {{ pve_vmid }} (reboot pending and allowed)"
+      ansible.builtin.command:
+        cmd: "pct reboot {{ pve_vmid }}"
+      delegate_to: "{{ groups['pve_nodes'] | first }}"
+      changed_when: true
+      when:
+        - allow_reboot | default(false) | bool
+        - reboot_pending | default(false) | bool
+
+- name: Report summary
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Build compact summary
+      ansible.builtin.set_fact:
+        _summary: |-
+          {% for h in groups['lxc_guests'] | sort -%}
+          {% set hv = hostvars[h] -%}
+          {{ "%-16s" | format(h) }} {{ ('upd(' ~ (hv.apt_upgraded_count | default('?')) ~ ')') if hv.apt_changed | default(false) else ('ok' if hv.apt_changed is defined else 'NO RESULT') }}{{ '  REBOOT-PENDING' if hv.reboot_pending | default(false) else '' }}{{ '  rebooted' if hv.reboot_done | default(false) else '' }}{{ '  [repo warnings]' if (hv.apt_repo_warnings | default('') | length) > 0 else '' }}
+          {% endfor %}
+        _changed_hosts: "{{ groups['lxc_guests'] | map('extract', hostvars) | selectattr('apt_changed', 'defined') | selectattr('apt_changed') | list | length }}"
+        _pending_hosts: "{{ groups['lxc_guests'] | map('extract', hostvars) | selectattr('reboot_pending', 'defined') | selectattr('reboot_pending') | list | length }}"
+
+    - name: Notify
+      ansible.builtin.include_role:
+        name: notify_webhook
+      vars:
+        notify_title: "LXC patch — {{ _changed_hosts }} updated, {{ _pending_hosts }} reboot-pending"
+        notify_message: "{{ _summary }}"

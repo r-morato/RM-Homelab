@@ -1,0 +1,60 @@
+---
+# ---------------------------------------------------------------------------
+# EXAMPLE inventory — safe to commit. Copy to hosts.yml and fill in real
+# addresses. hosts.yml is gitignored and never leaves the host.
+#
+# Placeholder scheme (same as the rest of the repo):
+#   10.0.0.x   = LAN / management segment
+#   10.0.1.x   = storage / cluster segment
+# ---------------------------------------------------------------------------
+
+all:
+  vars:
+    ansible_user: root
+    ansible_python_interpreter: auto_silent
+
+  children:
+
+    # -------------------------------------------------------------------
+    # Proxmox VE cluster nodes. patch-hosts.yml walks these serial: 1 and
+    # NEVER reboots them (see group_vars/pve_nodes.yml). reboot-hosts.yml is
+    # the hands-on job that drains HA and reboots.
+    # -------------------------------------------------------------------
+    pve_nodes:
+      hosts:
+        pve-node-1:
+          ansible_host: 10.0.0.11
+          pve_node_name: pve-node-1          # name as `ha-manager` / `pvecm` know it
+          pve_node_affinity_preferred: true  # HA node-affinity rule prefers this node
+        pve-node-2:
+          ansible_host: 10.0.0.12
+          pve_node_name: pve-node-2
+          pve_node_affinity_preferred: false
+
+    # -------------------------------------------------------------------
+    # All LXC guests Ansible manages. patch-guests.yml walks these.
+    # pve_vmid is used by the pre-patch vzdump step and the opt-in `pct reboot`.
+    # -------------------------------------------------------------------
+    lxc_guests:
+      hosts:
+        ct-dashboard:   { ansible_host: 10.0.0.100, pve_vmid: 100 }
+        ct-torrent:     { ansible_host: 10.0.0.101, pve_vmid: 101 }
+        ct-media-a:     { ansible_host: 10.0.0.102, pve_vmid: 102 }
+        ct-media-b:     { ansible_host: 10.0.0.103, pve_vmid: 103 }
+        ct-docker:      { ansible_host: 10.0.0.104, pve_vmid: 104 }
+        ct-gateway:     { ansible_host: 10.0.0.105, pve_vmid: 105 }
+        ct-indexer-a:   { ansible_host: 10.0.0.106, pve_vmid: 106 }
+        ct-indexer-b:   { ansible_host: 10.0.0.107, pve_vmid: 107 }
+        ct-indexer-c:   { ansible_host: 10.0.0.108, pve_vmid: 108 }
+        ct-app:         { ansible_host: 10.0.0.112, pve_vmid: 112 }
+
+    # -------------------------------------------------------------------
+    # Subset of lxc_guests that are on the nightly vzdump job. The
+    # pre-patch backup step in patch-guests.yml only snapshots these.
+    # -------------------------------------------------------------------
+    backup_protected:
+      hosts:
+        ct-dashboard: {}
+        ct-docker: {}
+        ct-gateway: {}
+        ct-app: {}

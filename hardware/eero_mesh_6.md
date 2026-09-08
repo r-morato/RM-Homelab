@@ -1,22 +1,20 @@
-# Eero Mesh 6 Wi-Fi System (Router)
+# Eero Mesh 6 — router / gateway
 
-## Overview
+The perimeter router and Wi-Fi for the whole house, including the lab. `10.0.0.1` on the
+LAN segment.
 
-The Eero Mesh 6 system serves as the primary Wi-Fi router and gateway for the entire homelab network and connected home devices.
+## Role
 
-## Specifications
+* **Gateway / NAT** — the only path to the internet.
+* **DHCP** for dynamic clients; static infra addresses sit outside the pool.
+* **Perimeter firewall** — the only packet filtering currently in effect (the Proxmox
+  firewall is designed but not enabled — see [`docs/security.md`](../docs/security.md)).
+* **Wi-Fi 6 mesh** for phones, laptops, smart-home gear, and the ESP32 display.
 
-* **Model:** Eero Mesh 6
-* **Type:** Wi-Fi 6 Mesh Router
-* **Key Features:** Mesh networking capabilities for broader Wi-Fi coverage, network security features, and simplified network management via mobile app.
+## Notes
 
-## Role in the Homelab
-
-* **Network Gateway:** Provides internet access to all devices within the homelab and the wider home network.
-* **Primary Router:** Manages DHCP services, network address translation (NAT), and basic firewall functions.
-* **Wireless Connectivity:** Creates the wireless network for all Wi-Fi enabled devices, including smart home gadgets, mobile devices, and laptops.
-* **Integration with Home Assistant:** Its presence on the network is detected and can be integrated into Home Assistant for network-related automation or status monitoring.
-
-## Placement
-
-The Eero router is strategically placed to provide optimal Wi-Fi coverage across the home while being connected to the homelab's core network switch.
+* No ports are forwarded to the lab. Remote access is via
+  [Guacamole](../software/guacamole.md) or a VPN.
+* Its presence is picked up by Home Assistant for device presence detection.
+* A dedicated x86 firewall/router appliance (OPNsense-class) is a long-standing "maybe"
+  — it would also give real VLAN support.

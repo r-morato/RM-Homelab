@@ -1,0 +1,19 @@
+---
+# LXC guests.
+#
+# Containers share the host kernel, so an in-guest "reboot required" is
+# almost always just a service that needs restarting after a library bump
+# (glibc/openssl). needrestart handles that live. A true `pct reboot`
+# is a fast (seconds) operation and is safe to allow on scheduled runs, but
+# it is OFF by default — enable per run with:  -e allow_reboot=true
+allow_reboot: false
+
+apt_upgrade_type: dist
+apt_autoremove: true
+
+# Install + use needrestart to bounce services touched by the upgrade,
+# in batch mode (no interactive prompts).
+needrestart_manage: true
+
+# patch-guests.yml walks the group this fraction at a time.
+guest_patch_serial: "50%"

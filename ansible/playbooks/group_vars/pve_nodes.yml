@@ -1,0 +1,23 @@
+---
+# Proxmox VE hypervisor nodes.
+#
+# patch-hosts.yml applies package updates here on a schedule but NEVER
+# reboots (allow_reboot stays false). If an update needs a reboot the run
+# records it and notifies; you then run reboot-hosts.yml by hand at a time
+# of your choosing. This is the "patch on schedule, notify-to-reboot" model.
+
+apt_upgrade_type: dist
+apt_autoremove: true
+
+# Hard block: a scheduled job must not reboot a hypervisor unattended.
+allow_reboot: false
+
+# How long to wait for the cluster to go quorate again after toggling
+# HA maintenance mode on a node.
+pvecm_quorum_retries: 24
+pvecm_quorum_delay: 5
+
+# How long to wait for HA services to drain off a node after enabling
+# maintenance mode (retries * delay seconds).
+ha_drain_retries: 30
+ha_drain_delay: 10

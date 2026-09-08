@@ -1,22 +1,17 @@
-# Oimaster HE-2006 4-Slot SATA Internal Rack
+# Oimaster HE-2006 — 4-slot hot-swap SATA cage
 
-## Overview
+A 4-bay internal hot-swap drive cage (3.5" slots, 2.5" SSDs via adapters, individual
+power indicators) fitted to [`pve-node-1`](thinkcentre_m720q.md).
 
-This component is a 4-bay internal SATA hot-swap drive rack. It is used to house 2.5-inch SSDs within the homelab setup.
+## Role
 
-## Specifications
+Gives the ThinkCentre — which has almost no internal drive room — accessible,
+tool-less SATA bays for 2.5" SSDs, connected through the
+[PCIe SATA card](pcie_sata_card.md).
 
-* **Model:** Oimaster HE-2006
-* **Drive Slots:** 4 slots, designed for 3.5" drives, utilized with 2.5" SSDs via adapters.
-* **Interface:** SATA.
-* **Features:** Hot-swappable bays, individual power indicators.
+## Notes
 
-## Role in the Homelab
-
-* **Drive Housing:** Provides a structured enclosure for the three MSI Spatium S270 240GB SSDs.
-* **Accessibility:** Facilitates easy installation, removal, and replacement of drives due to its hot-swap capabilities.
-* **Organization:** Helps in managing the storage drives neatly within the rack.
-
-## Connectivity
-
-The Oimaster HE-2006 connects to the ThinkCentre M720q host server. This connection is established using a PCIe SATA expansion card installed in the ThinkCentre, providing the necessary SATA data ports for the drives within the Oimaster enclosure.
+The cluster's live guest disks are on **NFS from the [NAS](nas.md)**, and each node
+boots from its internal NVMe, so these bays are spare capacity / local scratch rather
+than primary storage. They're the obvious place to land guest disks if the design moves
+stateful containers onto local storage (see [`docs/storage.md`](../docs/storage.md)).

@@ -1,0 +1,7 @@
+---
+notify_webhook_url: ""
+notify_webhook_enabled: "{{ (notify_webhook_url | default('') | length) > 0 }}"
+notify_title: "Ansible"
+notify_message: ""
+# the phone-push service returns HTTP 500 for bodies over ~5-7 KB. Hard-cap the message.
+notify_message_maxlen: 3500

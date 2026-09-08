@@ -1,37 +1,26 @@
-# Raspberry Pi 4 (Home Assistant)
+# Raspberry Pi 4 — Home Assistant
 
-## Overview
+A Raspberry Pi 4 (8 GB) running **Home Assistant OS on bare metal**, powered from the
+rack's 6-port USB charger and mounted in a custom 3D-printed 10-inch bracket.
 
-A Raspberry Pi 4 serves as the dedicated host for Home Assistant OS, acting as the central hub for home automation within the homelab.
+## Why bare metal, outside the cluster
 
-## Specifications
+Home automation should keep working while the Proxmox cluster is being patched, rebooted,
+or rebuilt — and it needs a stable USB path to the Zigbee coordinator. Running it on its
+own dedicated board keeps it independent of everything else in the rack. It has its own
+backup routine (HAOS snapshots) separate from the cluster's `vzdump` job.
 
-* **Model:** Raspberry Pi 4 8GB.
-* **Operating System:** Home Assistant OS (bare-metal installation).
-* **Power:** Powered via the 6-Port USB Charger.
+## Role
 
-## Role in the Homelab
+* **Home automation hub** — the single control point for the house's smart devices.
+* **Zigbee coordinator** — via a Sonoff Zigbee 3.0 USB Dongle Plus, for local
+  (cloud-free) control of sensors, lights, and switches.
 
-* **Home Automation Hub:** Manages and automates various smart home devices and services.
-* **Zigbee Coordinator:** Connects to Zigbee devices via a USB dongle.
-* **Integration Point:** Acts as a central point for integrating diverse smart home platforms and devices.
+## Integrations
 
-## Key Integrations & Connected Devices (as seen in configuration)
+Zigbee (Sonoff dongle), Hive heating ([`hive_hub.md`](hive_hub.md)), Ecovacs, Ring,
+Octopus Energy, LG webOS TV, Spotify, Tuya, the Eero router (presence detection), and
+the Home Assistant mobile apps. Plus the usual core integrations (`sun`, `met` weather,
+`cast`, Supervisor, `backup`).
 
-The Home Assistant instance on this Raspberry Pi manages a variety of smart home integrations, including:
-
-* **Zigbee Devices:** Connected via a Sonoff Zigbee 3.0 USB Dongle Plus.
-* **Eero Router:** For network presence and potentially status monitoring.
-* **Hive Heating System:** Integration for managing home heating.
-* **Ecovacs:** For robotic vacuum cleaner control.
-* **Octopus Energy:** For energy consumption monitoring.
-* **Ring:** For security camera and doorbell integration.
-* **LG webOS Smart TV:** For TV control and media integration.
-* **Spotify:** For media playback control.
-* **Tuya:** For smart devices using the Tuya platform.
-* **Mobile App:** Connectivity with Home Assistant mobile applications (iPad and iPhone).
-* **Other Home Assistant Core Integrations:** Includes default integrations like `sun`, `shopping_list`, `met` (weather), `upnp`, `cast`, and system services like `hassio` (Supervisor) and `backup`.
-
-## Mounting
-
-This Raspberry Pi is housed in a custom 3D printed 10-inch rack mount, ensuring a tidy and secure installation within the homelab rack.
+See [`software/homeassistant.md`](../software/homeassistant.md) for the platform side.

@@ -1,0 +1,18 @@
+---
+# Connectivity + privilege check for the whole fleet.
+#   ansible-playbook playbooks/ping.yml
+- name: Verify Ansible can reach and act on every host
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ping
+      ansible.builtin.ping:
+
+    - name: Show OS and kernel
+      ansible.builtin.raw: . /etc/os-release; echo "$PRETTY_NAME | kernel $(uname -r)"
+      register: _os
+      changed_when: false
+
+    - name: Report
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} ({{ ansible_host }}): {{ _os.stdout | trim }}"

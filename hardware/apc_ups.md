@@ -1,25 +1,27 @@
-# APC Back-UPS 0.5 KVA 300W
+# APC Back-UPS (300 W / 0.5 kVA)
 
-## Overview
+Line-interactive UPS on the critical leg of the rack: the two cluster nodes, the switch,
+the router, and the NAS. It rides out brownouts and short outages and gives everything
+time for a clean shutdown on a long one.
 
-The APC Back-UPS serves as an Uninterruptible Power Supply (UPS) for critical homelab components, providing a buffer against power outages and fluctuations.
+## Current state
 
-## Specifications
+* **Battery backup and surge protection: working.** A brief power blip is invisible to
+  the lab.
+* **Automatic graceful shutdown: not wired up yet.** It used to be driven over USB from
+  the (now offline) media NAS acting as a master and signalling Proxmox. With that box
+  down, there is no automatic "power's been out for N minutes, shut down now" path.
 
-* **Model:** APC Back-UPS (Specific model number, e.g., BX500CI or similar, if known).
-* **Capacity:** 0.5 KVA / 300W
-* **Type:** Line-interactive UPS
+The nodes' SSDs show a high unclean-shutdown count, so restoring this is a priority.
 
-## How does it trigger?
+## Plan
 
-I have configured the UPS on the QNAP via USB, and it works as a master sending commands to Proxmox when the power goes off so that all the containers and VMs are shutdown after a defined amount of time
+Connect the UPS's USB to one cluster node, run **NUT** (`nut-server` there,
+`nut-client` on the other node and the NAS), and configure a shutdown policy: on
+"battery low" or after a set time on battery, HA guests stop, then the nodes power off.
+Everything comes back on its own when mains returns and the nodes `onboot` their guests.
 
-## Purpose in the Homelab
+## Powered by the UPS
 
-* **Power Protection:** Shields connected devices from power surges, spikes, and brownouts.
-* **Uninterrupted Operation:** Provides battery backup during power failures, allowing time for controlled shutdowns of servers (like Proxmox) or maintaining continuous operation for essential services (like the network switch and router).
-* **Graceful Shutdowns:** Enables automated, safe shutdowns of systems to prevent data corruption during extended power outages.
-
-## Integration
-
-The UPS powers the most critical components of the homelab, including the ThinkCentre (Proxmox host), the TP-Link switch, the Eero router, and potentially the QNAP NAS, ensuring network connectivity and server uptime even during brief power interruptions.
+ThinkCentre (`pve-node-1`), HP EliteDesk (`pve-node-2`), TP-Link switch, Eero router,
+NAS. The Raspberry Pi and low-power accessories are on the non-UPS leg.

@@ -1,20 +1,17 @@
 # Plex Media Server
 
-## Overview
+Client–server media system. Runs in `ct-media-b` (VMID 103).
 
-Plex Media Server is a client-server media player system that organizes and streams personal media from a centralized server to various client devices.
+## Role
 
-## Type
+* Organises and streams the film/TV library (on the media NAS, bind-mounted in) to smart
+  TVs, phones, tablets, and browsers, on the LAN and remotely.
+* Runs alongside [Jellyfin](jellyfin.md) — Plex for polish and client support, Jellyfin
+  as the no-strings fallback.
 
-* Media Server Software
+## Notes
 
-## Role in the Homelab
-
-* **Media Library:** Organizes a large collection of films and TV shows stored on the QNAP NAS.
-* **Streaming Service:** Streams media content to client devices (e.g., smart TVs, phones, tablets, computers) both within the home network and remotely.
-* **Content Management:** Automatically fetches metadata, artwork, and other information for media files, presenting them in an organized and visually appealing library.
-
-## Hosting & Storage
-
-* **Host:** Plex Media Server runs as a service within the homelab, typically as a Docker container or an LXC on Proxmox.
-* **Media Storage:** Media files are stored on the QNAP TS-230 NAS.
+* **Hardware transcoding** via the host iGPU, shared with the Jellyfin container.
+* **Not on the backup job.** Media is on the NAS; the Plex database is a metadata cache
+  that rebuilds from a library scan.
+* HA-managed; needs the media bind-mount on whichever node runs it.

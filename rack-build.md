@@ -131,7 +131,7 @@ Internal power is handled by compact 10” PDUs designed for SOHO setups.
 
 A key part of the build — these mounts allow non-rack devices to fit securely and efficiently.
 
-All files and links are documented in the [Custom 3D Prints](../3d_prints/README.md) section.
+All files and links are documented in the [Custom 3D Prints](3d_prints/README.md) section.
 
 - **Raspberry Pi 3B/4B/5B Rack Mount**  
   [Printables.com](https://www.printables.com/model/1185545-raspberry-pi-3b4b5b-10-inch-rack-mount/files)

@@ -1,0 +1,94 @@
+---
+# Idempotent apt update + upgrade for a Debian/Ubuntu host or container.
+# Sets these facts for the run summary:
+#   apt_changed        - bool, did anything actually upgrade
+#   apt_upgraded_count - int, number of packages changed
+#   apt_repo_warnings  - str, non-fatal repo problems seen during `apt update` (or "")
+#   reboot_required    - bool, /var/run/reboot-required present
+#   reboot_done        - bool, this role rebooted the host
+#   reboot_pending     - bool, reboot needed but not permitted here
+
+# `apt-get update` returns 100 when SOME repositories fail but others succeed
+# (e.g. a dead third-party repo). That must NOT wedge patching of everything the
+# working repos provide, so we tolerate rc 100 and carry the warning into the
+# summary. rc of anything else (network down, dpkg lock, ...) is still fatal.
+- name: Update apt cache
+  ansible.builtin.command:
+    cmd: apt-get update
+  register: _apt_cache
+  changed_when: false
+  retries: 2
+  delay: 10
+  until: _apt_cache.rc in [0, 100]
+  failed_when: _apt_cache.rc not in [0, 100]
+
+- name: Record any non-fatal repo warnings for the summary
+  ansible.builtin.set_fact:
+    apt_repo_warnings: >-
+      {{ (_apt_cache.stderr_lines | default([]))
+         | select('match', '^[WE]:') | join(' | ') }}
+
+- name: Show repo warnings (non-fatal)
+  ansible.builtin.debug:
+    msg: "{{ inventory_hostname }}: apt repo problems — {{ apt_repo_warnings }}"
+  when: apt_repo_warnings | length > 0
+
+- name: Simulate the upgrade (for the summary, no changes)
+  ansible.builtin.command:
+    cmd: apt-get --simulate --quiet=2 dist-upgrade
+  changed_when: false
+  register: _apt_sim
+
+- name: Count packages that would change
+  ansible.builtin.set_fact:
+    apt_pending_count: "{{ _apt_sim.stdout_lines | select('match', '^Inst ') | list | length }}"
+
+- name: Ensure needrestart is present
+  ansible.builtin.apt:
+    name: needrestart
+    state: present
+  when: needrestart_manage | bool
+
+- name: "Upgrade packages ({{ apt_upgrade_type }})"
+  ansible.builtin.apt:
+    upgrade: "{{ apt_upgrade_type }}"
+    autoremove: "{{ apt_autoremove }}"
+    autoclean: "{{ apt_autoclean }}"
+    dpkg_options: force-confdef,force-confold
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+    NEEDRESTART_MODE: a          # needrestart: auto-restart services, never prompt
+  register: _apt_upgrade
+
+- name: Record upgrade result
+  ansible.builtin.set_fact:
+    apt_changed: "{{ _apt_upgrade.changed }}"
+    apt_upgraded_count: "{{ apt_pending_count }}"
+
+- name: Run needrestart in batch mode to catch anything apt/needrestart missed
+  ansible.builtin.command:
+    cmd: needrestart -r a -b
+  register: _needrestart
+  changed_when: false
+  failed_when: false
+  when: needrestart_manage | bool
+
+- name: Check for a pending reboot
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: _reboot_file
+
+- name: Reboot now (only when explicitly allowed for this host/run)
+  ansible.builtin.reboot:
+    reboot_timeout: "{{ reboot_timeout }}"
+    msg: Reboot triggered by Ansible apt_upgrade role
+  when:
+    - allow_reboot | bool
+    - _reboot_file.stat.exists
+  register: _reboot
+
+- name: Record reboot state
+  ansible.builtin.set_fact:
+    reboot_required: "{{ _reboot_file.stat.exists }}"
+    reboot_done: "{{ _reboot is defined and (_reboot.rebooted | default(false)) }}"
+    reboot_pending: "{{ _reboot_file.stat.exists and not (allow_reboot | bool) }}"

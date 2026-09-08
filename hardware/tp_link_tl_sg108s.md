@@ -1,21 +1,23 @@
-# TP-Link TL-SG108S 8-Port Gigabit Switch
+# TP-Link TL-SG108S — 8-port gigabit switch
 
-## Overview
+The wired core of the rack. Unmanaged, plug-and-play, gigabit on all 8 ports.
 
-The TP-Link TL-SG108S is an unmanaged 8-port Gigabit Ethernet switch used for wired network connectivity within the homelab.
+## Role
 
-## Specifications
+Connects everything wired: both cluster nodes (two cables each — one per segment), the
+NAS (two cables), the Raspberry Pi, the Mac Mini, and the uplink to the
+[Eero](eero_mesh_6.md).
 
-* **Model:** TP-Link TL-SG108S
-* **Ports:** 8x Gigabit Ethernet (10/100/1000 Mbps)
-* **Type:** Unmanaged Switch
-* **Features:** Plug-and-play operation.
+## Consequence of it being unmanaged
 
-## Role in the Homelab
+No VLANs. The "LAN" and "storage/cluster" segments
+([`docs/networking.md`](../docs/networking.md)) therefore share **one L2 broadcast
+domain** — separation is logical (different subnets, and each node uses a specific NIC
+for storage/corosync traffic), not true isolation. A managed switch with VLANs, or a
+direct node-to-node link for corosync, is on the roadmap.
 
-* **Network Connectivity:** Provides wired network connections for multiple devices within the rack, including the ThinkCentre, QNAP, and potentially other network-enabled hardware.
-* **Central Connection Point:** Acts as a central hub for the wired segment of the homelab network, connecting all devices to the Eero router.
+At 8 ports it is also nearly full — the next expansion needs a bigger switch anyway.
 
 ## Mounting
 
-The TP-Link switch is installed in a custom 3D printed 10-inch rack mount. (Refer to [TP-Link TL-SG108 10-inch Rack Mount](3d_prints/README.md) for details).
+Custom 3D-printed 10-inch bracket — see [`3d_prints/`](../3d_prints/).

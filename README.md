@@ -1,112 +1,104 @@
 # RM-Homelab
 
- <img width="583" height="892" alt="Screenshot 2025-07-17 at 16 37 44" src="https://github.com/user-attachments/assets/839070fc-07c0-4ad8-93b7-052136dc8fb8" /> 
+<img width="583" alt="The rack" src="https://github.com/user-attachments/assets/839070fc-07c0-4ad8-93b7-052136dc8fb8" />
 
+A compact, quiet, movable homelab in a custom 10-inch rack — two cables to run it
+(power and Ethernet), enough capability to host the services I use every day, and
+built so a single hardware failure or a bad upgrade doesn't take anything down for long.
 
-## Overview
+This repo documents **how it works**: the cluster, the storage and replication model,
+backups, the automation that patches everything, and the security choices. It is written
+so I can rebuild from it.
 
-Welcome to my homelab. This project started with a pretty clear goal: build something that could host my infrastructure in a neat, self-contained unit — something practical, portable, and efficient. I didn’t want a tangle of wires across the room or a power-hungry tower that doubled as a space heater.
+> **Addresses and hostnames in this repo are sanitised.** `10.0.0.x` is the LAN /
+> management segment, `10.0.1.x` the storage + cluster segment, and hostnames are
+> generic labels (`pve-node-1`, `ct-dashboard`, …). Real values live only in a
+> gitignored inventory on the host.
 
-I aimed for a system that ran quietly, consumed low power, was physically mobile (hence, wheels), and required only two cables to get going: power and Ethernet. Despite that simplicity, I still wanted it to be capable enough to handle virtual machines, media streaming, and automation without breaking the bank. This homelab is my way of experimenting, learning, and staying sane — all in one rack.
+## Why build it
 
-<img width="378" alt="image" src="https://github.com/user-attachments/assets/b2fc90ac-63e8-43ac-b9bb-f2d8e1db8b5f" /> 
+I wanted one place to learn, experiment, and self-host — with real control over my data
+and no monthly bill for things I can run myself. The constraints that shaped every
+decision: **low noise** (it lives near people), **low power**, **physically mobile**
+(hence wheels), and **cheap** — no enterprise hardware. Not the most powerful lab; the
+sweet spot between capability, cost, and cleanliness.
 
-## Why Build This?
+## What it is now
 
-I needed a central place to learn, experiment, and host the services I use every day. Cloud services are great — until you want more control or get tired of paying for things you could run yourself. So this is part learning platform, part practical utility. 
+- **2-node Proxmox VE cluster** (a Lenovo ThinkCentre M720q and an HP EliteDesk 800
+  mini-PC) with an external **QDevice** on the NAS for quorum.
+- **High availability across every running guest** — lose a node and everything restarts
+  on the other in a few minutes, then moves home when the node returns.
+- **Shared storage over NFS from the NAS** — guest disks live there so either node can
+  run any guest.
+- **Nightly backups to the NAS** — `vzdump` for the stateful containers, a daily
+  host-config archive, and a database-consistent dump for the one guest that needs it.
+  Restores are tested.
+- **Scheduled, hands-off patching** — a dedicated Ansible container with a
+  [Semaphore](https://github.com/semaphoreui/semaphore) web UI patches the containers
+  weekly and the hypervisors monthly, and pushes a summary to my phone. Reboots stay
+  manual.
+- **Hardened baseline** — key-only SSH with `fail2ban`, the Docker API on a local socket
+  only, secrets kept out of git, and a staged firewall rollout.
 
-More than anything, I wanted a setup that:
+## Documentation
 
-- Was efficient and low-noise (it lives near people).
-- Could be moved around easily.
-- Didn't involve spending thousands on enterprise hardware.
-- Could handle a reasonable mix of storage, compute, and networking.
+| | |
+|---|---|
+| [Architecture](docs/architecture.md) | how it all fits together — nodes, guests, storage, boot order |
+| [High availability & replication](docs/high-availability.md) | quorum on 2 nodes, HA failover, planned-maintenance drains |
+| [Storage](docs/storage.md) | the NFS / local-lvm / media-NAS tiers and the trade-offs |
+| [Networking](docs/networking.md) | the two segments, addressing, DNS, the corosync caveat |
+| [Backups](docs/backups.md) | the `vzdump` job, host-config backup, the DB hook, restore test |
+| [Automation](docs/automation.md) | the Ansible + Semaphore control container and repo |
+| [Automated patching](docs/patching.md) | the "patch on schedule, notify-to-reboot" model |
+| [Provisioning & configuration](docs/provisioning.md) | how a new guest is built and wired in |
+| [Security](docs/security.md) | SSH, isolation, service exposure, the firewall plan |
+| [Ansible playbooks](ansible/) | the actual automation code, with its own README |
+| [Rack build](rack-build.md) | the custom 10-inch enclosure |
+| [Hardware](hardware/) · [Software](software/) | per-component notes |
+| [Diagrams](diagrams/) · [3D prints](3d_prints/) | network + cluster diagrams, printed mounts |
 
-This was never about building the most powerful or flashy setup — it was about finding the sweet spot between capability, cost, and cleanliness.
+## Hardware at a glance
 
-<img width="536" height="898" alt="Screenshot 2025-07-17 at 16 38 14" src="https://github.com/user-attachments/assets/35756d36-ad88-4a62-8a9e-c93d74f3043a" />
+| Component | Role |
+|---|---|
+| Lenovo ThinkCentre M720q Tiny | Proxmox VE cluster node 1 (primary) |
+| HP EliteDesk 800 (Mini) | Proxmox VE cluster node 2 (failover) |
+| NAS (mirrored disks) | NFS shared storage, backup target, corosync QDevice |
+| Raspberry Pi 4 | Home Assistant OS (bare metal, outside the cluster) |
+| ESP32 + e-ink display | Proxmox stats display on the rack |
+| Mac Mini | jump box / daily driver |
+| TP-Link TL-SG108S | 8-port gigabit switch (unmanaged) |
+| Eero Mesh 6 | router / gateway / Wi-Fi |
+| APC Back-UPS 300W | battery backup |
+| Oimaster HE-2006 + PCIe SATA card | hot-swap SSD bays |
+| Hive Hub | heating control (Home Assistant integration) |
 
-## Highlights
+Full notes in [`hardware/`](hardware/) and [`rack-build.md`](rack-build.md).
 
-Some of the standout features of this setup:
+## Lessons learned
 
-- **Single-point deployment**: Just plug in power and Ethernet, and the entire lab comes to life.
-- **Proxmox-powered virtualization**: Most services run in either LXCs or lightweight VMs.
-- **Compact and modular**: Rack-mounted, low-profile components to keep things neat and upgrade-friendly.
-- **Power efficient**: All chosen with efficiency in mind — especially the ThinkCentre, which punches above its weight.
+- **Noise matters more than you think** when servers live near bedrooms.
+- **Cheap gear goes surprisingly far** if you're willing to tinker.
+- **Power and thermals aren't optional** — the SSDs show a high unclean-shutdown count,
+  which is why a UPS with automatic graceful shutdown is near the top of the list.
+- **A 2-node cluster needs a third vote.** Without the QDevice, losing either node
+  freezes the survivor. With it, failover is a non-event.
+- **`curl | bash` from someone else's `main` branch, as root, on a schedule** is a bad
+  idea however convenient — replacing it with version-controlled Ansible was worth it.
+- **Snapshots and tested restores turn mistakes into footnotes.**
 
-## Core Services
+## Roadmap
 
-### Virtualization & Infrastructure
-- **Proxmox VE** – My main hypervisor. Runs both VMs and LXCs.
-- **Semaphore** – Manages Ansible playbooks and automations.
-- **Portainer** – Used for managing Docker containers when needed.
-- **VS Code Server** – For editing and maintaining everything remotely.
+- Off-NAS / offsite copy of the backup archives (currently the biggest gap).
+- Finish the staged Proxmox firewall rollout (see [security](docs/security.md)).
+- Second corosync link so the heartbeat doesn't share one wire with NFS.
+- Move small stateful containers onto local storage for snapshot-mode backups.
+- 2FA on the Proxmox admin account and Semaphore.
+- Dynamic Ansible inventory from the PVE API.
+- More Home Assistant sensors and automations.
 
-### Networking & Monitoring
-- **Pi-hole** – Local DNS and ad-blocking.
-- **UptimeKuma** – Uptime monitoring across all services.
-- **ESP32 w/ eInk display** – Custom-built Proxmox dashboard.
+## License
 
-### Storage & Media
-- **QNAP NAS (4TB Mirrored)** – Handles all shared storage.
-- **Plex** – Streams my media collection.
-- **QBittorrent** – Lightweight torrenting via web UI.
-
-### Home Automation
-- **Home Assistant (Raspberry Pi 4)** – Ties everything in the house together.
-
-## Hardware Breakdown
-
-All parts were chosen for their balance of efficiency, performance, and affordability:
-
-- **ThinkCentre M720q Tiny** – The main workhorse running Proxmox.
-- **QNAP NAS** – Redundant storage for media and backups.
-- **Mac Mini** – Acts as a jump box and quick access point.
-- **Raspberry Pi 4** – Dedicated to Home Assistant.
-- **ESP32 w/ eInk** – Monitors Proxmox stats in real time.
-- **TP-Link TL-SG108S** – 8-Port gigabit switch.
-- **Eero Mesh 6** – Simple and reliable mesh Wi-Fi.
-- **Hive Hub** – Controls heating systems.
-- **APC Back-UPS 300W** – Battery backup for unexpected outages.
-- **Oimaster 4-slot SATA rack** – Quick-swap SATA access.
-- **1x PCIe to 4-port SATA card** – For extending storage inside tight enclosures.
-
-See [Rack Build Components](rack-build.md) for full build notes.
-
-## Diagrams
-
-Visualizing the layout and network always helps:
-- [Network Diagram](diagrams/network-diagram.md)
-- [Rack Diagram](diagrams/rack-diagram.pdf)
-
-## Customizations & 3D Prints
-
-To keep things neat, I've designed a few parts myself and printed them:
-- [Custom 3D Prints](3d_prints/README.md)
-
-These include brackets, cable guides, and mounts to keep the whole rack tidy and quiet.
-
-## Lessons Learned
-
-This homelab has been an ongoing experiment. A few takeaways so far:
-
-- **Noise matters more than you think** — especially when your servers live near bedrooms.
-- **Cheap gear can take you surprisingly far**, if you're willing to tinker.
-- **Power and thermals aren't optional** — efficiency isn't just about cost, it's about long-term stability.
-- **Having everything in one rack feels great** — way better than scattered gear across shelves and desks.
-- **You will make mistakes** — but the great thing about infrastructure as code and Proxmox snapshots is how easy it is to start fresh.
-
-## Future Plans
-
-Where I want to go next:
-
-- Add a proper firewall/router appliance (likely something x86-based).
-- Experiment with Kubernetes (likely K3s).
-- Automate more with Ansible, Terraform and GitHub Actions.
-- Expand backup solutions, potentially offsite or cloud-integrated.
-- Increase Home Assistant integrations — more sensors, more automations.
-
-## Final Thoughts
-
-This homelab isn't finished — and probably never will be. That’s kind of the point. It's a place to learn, test ideas, and gradually build toward the ideal personal infrastructure. It might not be flashy, but it’s mine — and that’s what makes it satisfying to keep evolving.
+[MIT](LICENSE) © Roger Morato

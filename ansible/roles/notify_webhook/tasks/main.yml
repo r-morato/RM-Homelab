@@ -1,0 +1,29 @@
+---
+# POST a short {"title","message"} JSON body to the notification webhook
+# (the phone-push service). Runs once, from the control node. Never fails the play.
+
+- name: Send notification
+  ansible.builtin.uri:
+    url: "{{ notify_webhook_url }}"
+    method: POST
+    headers:
+      Content-Type: application/json
+    body_format: json
+    body:
+      title: "{{ notify_title }}"
+      message: "{{ notify_message | truncate(notify_message_maxlen, true, ' […]') }}"
+    status_code: [200, 201, 202, 204]
+    timeout: 15
+  delegate_to: localhost
+  run_once: true
+  register: _notify
+  failed_when: false
+  changed_when: false
+  when: notify_webhook_enabled | bool
+
+- name: Note if the notification did not go through
+  ansible.builtin.debug:
+    msg: "Webhook notification failed (status {{ _notify.status | default('n/a') }}) — continuing."
+  when:
+    - notify_webhook_enabled | bool
+    - _notify.status is not defined or _notify.status not in [200, 201, 202, 204]

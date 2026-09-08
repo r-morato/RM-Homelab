@@ -1,20 +1,17 @@
-# UptimeKuma
+# Uptime Kuma
 
-## Overview
+Self-hosted uptime monitoring and status page. Runs as a container on the
+[Docker host](docker-host.md) (`ct-docker`).
 
-UptimeKuma is a self-hosted monitoring tool that provides status pages and uptime monitoring for various services and devices.
+## Role
 
-## Type
+* Polls every key service (Proxmox web UI, the media servers, the dashboard, Pi-hole,
+  Home Assistant, the gateway) on an interval and records availability + response time.
+* Sends a notification when something goes down or recovers.
+* Provides an at-a-glance status dashboard.
 
-* Self-hosted Monitoring Tool
-* Status Page Generator
+## Notes
 
-## Role in the Homelab
-
-* **Service Monitoring:** Continuously checks the availability and responsiveness of all key homelab services (e.g., Proxmox, Plex, Home Assistant, Pi-hole).
-* **Alerting:** Configured to send notifications if a monitored service goes offline or becomes unresponsive.
-* **Status Dashboard:** Provides a centralized, real-time dashboard displaying the current status of all monitored components, offering a quick overview of the homelab's health.
-
-## Hosting
-
-UptimeKuma runs as a service within the homelab environment, commonly deployed as a Docker container or an LXC on Proxmox.
+* Monitor definitions are hand-built state → `ct-docker` is on the nightly backup job.
+* It's a useful cross-check on the automation: a patch run that breaks a service shows
+  up here even if the playbook reported success.

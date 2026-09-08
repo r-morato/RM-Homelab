@@ -1,0 +1,9 @@
+---
+apt_upgrade_type: safe             # safe | full | dist
+apt_autoremove: false
+apt_autoclean: true
+
+allow_reboot: false
+reboot_timeout: 600
+
+needrestart_manage: false          # install needrestart and run it in batch mode

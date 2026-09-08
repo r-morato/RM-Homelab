@@ -1,19 +1,12 @@
-# Hive Hub (Heating Management)
+# Hive Hub — heating control
 
-## Overview
+The manufacturer hub for the home's Hive smart heating (thermostat + schedule). Powered
+from the rack's 6-port USB charger, sat on top of the rack to keep its radio clear of
+the metal.
 
-The Hive Hub is a smart home device. It acts as the central controller for the Hive heating system.
+## Role
 
-## Specifications
-
-* **Type:** Smart Home Hub.
-* **Power:** Receives power from the 6-Port USB Charger.
-
-## Role in the Homelab
-
-* **Heating Control:** Manages the home's Hive smart heating system.
-* **Home Assistant Integration:** Connects with Home Assistant for centralized smart home management.
-
-## Placement
-
-The Hive Hub is located on top of the homelab rack to avoid interference. 
+* Talks to the Hive thermostat and receiver over its own radio.
+* Bridged into [Home Assistant](../software/homeassistant.md) via the Hive integration,
+  so heating is part of presence- and schedule-driven automations rather than a
+  separate app.

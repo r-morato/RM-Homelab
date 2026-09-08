@@ -1,0 +1,20 @@
+---
+ha_drain_retries: 30
+ha_drain_delay: 10
+node_reboot_timeout: 900          # cold PVE boot + kernel init can be slow
+node_post_reboot_delay: 30
+pvecm_quorum_retries: 36
+pvecm_quorum_delay: 5
+pveproxy_wait_timeout: 180
+ha_return_retries: 30
+ha_return_delay: 10
+
+# Safety: only reboot a node that actually needs it unless forced.
+reboot_only_if_required: true
+
+# The Ansible/Semaphore control node. This playbook runs *inside* it, so it must
+# never reboot (or drain) the node currently hosting it — that kills the run.
+control_node_vmid: 109
+# Set true on the command line ONLY after you have manually moved CT 109 to the
+# other node, to let this play reboot the node it used to be on.
+control_node_relocated: false

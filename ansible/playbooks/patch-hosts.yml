@@ -1,0 +1,45 @@
+---
+# Patch the Proxmox VE nodes — package updates only, NEVER a reboot, NO HA drain.
+# One node at a time.
+#
+#   ansible-playbook playbooks/patch-hosts.yml
+#   ansible-playbook playbooks/patch-hosts.yml --check          # dry run
+#   ansible-playbook playbooks/patch-hosts.yml --limit pve-node-2
+#
+# `apt dist-upgrade` on a running node is safe and does not disturb its guests,
+# so this job does NOT enter HA maintenance mode. (It also means the job is safe
+# to run from CT 109 wherever CT 109 happens to be.) If a node ends up needing a
+# reboot, the run says so and you then run reboot-hosts.yml by hand.
+
+- name: Patch Proxmox VE nodes (packages only, no reboot, no drain)
+  hosts: pve_nodes
+  gather_facts: true
+  serial: 1
+  any_errors_fatal: true
+  roles:
+    - role: pve_node_patch
+
+- name: Report summary
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Build summary
+      ansible.builtin.set_fact:
+        _summary: |-
+          {% for h in groups['pve_nodes'] -%}
+          {% set hv = hostvars[h] -%}
+          {{ "%-14s" | format(h) }} {{ 'upd(' ~ (hv.apt_upgraded_count | default('?')) ~ ')' if hv.apt_changed | default(false) else 'ok' }}{{ '  REBOOT REQUIRED' if hv.reboot_required | default(false) else '' }}{{ '  [repo warnings]' if (hv.apt_repo_warnings | default('') | length) > 0 else '' }}
+          {% endfor %}
+        _reboot_nodes: "{{ groups['pve_nodes'] | map('extract', hostvars) | selectattr('reboot_required', 'defined') | selectattr('reboot_required') | list | length }}"
+
+    - name: Notify
+      ansible.builtin.include_role:
+        name: notify_webhook
+      vars:
+        notify_title: >-
+          PVE host patch — {{ _reboot_nodes }} node(s) need a reboot
+        notify_message: |-
+          {{ _summary }}
+          {% if (_reboot_nodes | int) > 0 %}
+          Run reboot-hosts.yml (hands-on) to apply.
+          {% endif %}

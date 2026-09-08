@@ -1,0 +1,27 @@
+---
+# Patch ONE Proxmox VE node — package updates only.
+#
+# There is NO HA drain here on purpose: `apt dist-upgrade` on a running PVE node
+# with guests on it is safe, and draining every guest to the other node (and back)
+# just to install packages is disruptive and — because the Ansible control node
+# (CT 109) is itself an HA guest — would migrate this playbook out from under
+# itself. Draining belongs to reboot-hosts.yml, which is a deliberate manual op.
+#
+# Run from a play with `serial: 1` so the nodes are done one at a time.
+
+- name: "{{ pve_node_name }} — apt dist-upgrade (no reboot, no drain)"
+  ansible.builtin.include_role:
+    name: apt_upgrade
+  vars:
+    apt_upgrade_type: dist
+    apt_autoremove: true
+    allow_reboot: false
+    needrestart_manage: false      # PVE ships its own needrestart policy; leave it
+
+- name: "{{ pve_node_name }} — note if a reboot is now required"
+  ansible.builtin.debug:
+    msg: >-
+      {{ pve_node_name }} needs a reboot
+      ({{ 'reboot-required flag set' if reboot_required | default(false) else 'kernel updated' }}).
+      Run reboot-hosts.yml when you can watch it.
+  when: reboot_required | default(false) | bool

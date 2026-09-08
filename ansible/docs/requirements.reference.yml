@@ -1,0 +1,9 @@
+---
+# Install with:  ansible-galaxy collection install -r requirements.yml
+# (the Makefile / docs/control-node.md wire this into the control-node build)
+
+collections:
+  - name: community.general
+    version: ">=10.0.0"      # proxmox_* modules, the proxmox dynamic inventory plugin
+  - name: ansible.posix
+    version: ">=1.5.0"       # ansible.posix.patch, mount, sysctl helpers (future roles)

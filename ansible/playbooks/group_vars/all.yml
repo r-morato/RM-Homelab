@@ -1,0 +1,24 @@
+---
+# Defaults for every managed host. Override per group in the files below,
+# or per run with -e / Semaphore "extra variables".
+
+# --- apt behaviour -------------------------------------------------------
+apt_upgrade_type: dist            # safe | full | dist  (dist == dist-upgrade)
+apt_autoremove: true
+apt_autoclean: true
+
+# --- reboots -----------------------------------------------------------
+# Global master switch. Individual groups tighten this further.
+allow_reboot: false
+reboot_timeout: 600
+
+# --- pre-patch backup (guests) ---------------------------------------
+pre_patch_backup: true
+# pre_patch_backup_storage is set in the real inventory (defaults to PROX-NFS)
+
+# --- notifications ---------------------------------------------------
+# notify_webhook_url is set in the real inventory. Empty => notifications
+# are skipped silently. Keep messages SHORT: the phone-push service endpoint returns
+# HTTP 500 for bodies over ~5-7 KB, so the summary must stay compact.
+notify_webhook_url: ""
+notify_webhook_enabled: "{{ (notify_webhook_url | default('') | length) > 0 }}"

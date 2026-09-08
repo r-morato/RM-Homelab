@@ -1,0 +1,44 @@
+---
+# Rolling reboot of the Proxmox VE nodes. Run this BY HAND, when you can watch it,
+# after patch-hosts.yml has reported a node needs a reboot.
+#
+# ── IMPORTANT: the control node ──────────────────────────────────────────────
+# This playbook runs inside CT 109 (the Ansible/Semaphore control node), which is
+# an HA guest. A node reboot evacuates its HA guests, so rebooting the node that
+# currently hosts CT 109 would kill this run. The play GUARDS against that and
+# stops with instructions. The safe procedure on this 2-node cluster:
+#
+#   1. Find where CT 109 is:   ha-manager status | grep ct:109
+#   2. Reboot the OTHER node:  ansible-playbook playbooks/reboot-hosts.yml --limit <other>
+#   3. Move the control node:  ha-manager migrate ct:109 <other>   (wait for it to land)
+#   4. Reboot the first node:  ansible-playbook playbooks/reboot-hosts.yml \
+#                                --limit <first> -e control_node_relocated=true
+#
+# Other options:
+#   -e reboot_only_if_required=false   reboot even if the kernel looks current
+#   --limit pve-node-2                just one node
+#
+# One node at a time; any_errors_fatal stops the run if a node doesn't come back
+# quorate + pveproxy-up before the second is touched.
+
+- name: Rolling reboot of Proxmox VE nodes
+  hosts: pve_nodes
+  gather_facts: true
+  serial: 1
+  any_errors_fatal: true
+  roles:
+    - role: pve_node_reboot
+
+- name: Report
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Notify
+      ansible.builtin.include_role:
+        name: notify_webhook
+      vars:
+        notify_title: "PVE rolling reboot complete"
+        notify_message: |-
+          {% for h in groups['pve_nodes'] -%}
+          {{ h }}: {{ 'rebooted' if hostvars[h]._do_reboot | default(false) else 'skipped (kernel current)' }}
+          {% endfor %}

@@ -1,20 +1,23 @@
 # VS Code Server
 
-## Overview
+Browser-accessible VS Code for editing the lab's config and automation without a local
+checkout.
 
-VS Code Server is a backend service that allows you to run Visual Studio Code remotely on a server and access it through a web browser.
+<!-- TODO(@r-morato): confirm where code-server runs before publishing — this page
+     assumes a container on the Docker host. Update if it's elsewhere. -->
 
-## Type
+## Role
 
-* Remote Development Environment
-* Cloud-based IDE
-
-## Role in the Homelab
-
-* **Web-based Development:** Provides a powerful, browser-accessible VS Code instance for development and script editing directly on the homelab's server.
-* **Centralized Codebase:** Allows for managing and editing configuration files, automation scripts (e.g., Ansible, Terraform), and other code related to the homelab without needing a local VS Code installation connected via SSH.
-* **Resource Efficiency:** Leverages the server's resources for demanding tasks, potentially freeing up local machine resources.
+* Edit playbooks, compose files, dashboard config, and notes from any device with a
+  browser.
+* Runs on the server so the work happens next to the files it touches.
 
 ## Hosting
 
-VS Code Server runs as a service within the homelab, likely as a Docker container or an LXC on Proxmox, accessible via a web browser.
+Runs as a container on the [Docker host](docker-host.md) (`ct-docker`).
+
+## Notes
+
+* Convenience tool, not infrastructure — nothing depends on it.
+* It can reach the repo and config, so it's access-controlled (login + LAN-only) and
+  folded into the [firewall](../docs/security.md) plan like the other web UIs.
