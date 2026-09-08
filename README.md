@@ -1,6 +1,8 @@
 # RM-Homelab
 
-<img width="583" alt="The rack" src="https://github.com/user-attachments/assets/839070fc-07c0-4ad8-93b7-052136dc8fb8" />
+<img width="2918" height="3960" alt="IMG_4560 2" src="https://github.com/user-attachments/assets/0223a99f-b0c9-417e-9593-993b6e6d5f56" />
+<img width="3024" height="4032" alt="IMG_4561" src="https://github.com/user-attachments/assets/618edf16-dd9a-40da-baa7-ba63f2c1ba30" />
+
 
 A compact, quiet, movable homelab in a custom 10-inch rack - two cables to run it
 (power and Ethernet), enough capability to host the services I use every day, and

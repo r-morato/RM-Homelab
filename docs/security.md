@@ -1,8 +1,8 @@
 # Security posture
 
 This is a homelab on a home LAN, not an internet-exposed service. Nothing is
-port-forwarded; remote access is via [Guacamole](../software/guacamole.md) or a VPN back
-home. Within that context, the design choices below. Hardening is an ongoing effort - the
+port-forwarded; remote access is via a VPN back
+home. Within that context, the design choices below. Hardening is an ongoing effort — the
 roadmap at the end lists what's still in progress.
 
 ## SSH
