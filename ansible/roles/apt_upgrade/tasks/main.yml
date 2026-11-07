@@ -37,6 +37,7 @@
   ansible.builtin.command:
     cmd: apt-get --simulate --quiet=2 dist-upgrade
   changed_when: false
+  check_mode: false    # read-only, so --check runs report real counts
   register: _apt_sim
 
 - name: Count packages that would change
